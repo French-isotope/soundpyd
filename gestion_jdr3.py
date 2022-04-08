@@ -19,7 +19,6 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/MSE.mp3",
-#        "sound": pygame.mixer.Sound("C:/test_yt_dl/MSE.mp3")
     },
     {
         "name": "war",
@@ -28,7 +27,6 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/FSW.mp3",
-#        "sound": pygame.mixer.Sound("C:/test_yt_dl/FSW.mp3")
     },
     {
         "name": "cavern",
@@ -37,7 +35,6 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/SC.mp3",
-#        "sound": pygame.mixer.Sound("C:/test_yt_dl/SC.mp3")
     },
     {
         "name": "house_with_fire",
@@ -46,7 +43,6 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/house_with_fire.mp3",
-#        "sound": pygame.mixer.Sound("C:/test_yt_dl/house_with_fire.mp3")
     },
     {
         "name": "joy_festival",
@@ -55,7 +51,6 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/joy_festival.mp3",
-#        "sound": pygame.mixer.Sound("C:/test_yt_dl/joy_festival.mp3")
     },
 ]
 
@@ -75,7 +70,7 @@ def toggle_sound(is_playing, soundname, sound, fade_time=4000):
         return True
 
 
-def button(screen, position, text, size, colors="white on blue"):
+def text_button(screen, position, text, size, colors="white on blue"):
     fg, bg = colors.split(" on ")
     font = pygame.font.SysFont("Calibri", size)
     text_render = font.render(text, 1, fg)
@@ -100,16 +95,16 @@ def action_on_click(b, var_button, sound, fade_time):
 
 def change_color_down(button_var):
     if button_var["playing"]:
-        return button(screen, button_var["coords"], button_var["name"], button_var["size"], IMAGE_DOWN_COLOR)
+        return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], IMAGE_DOWN_COLOR)
     else:
-        return button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
+        return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
 
 
 def change_color_over(b, button_var):
     if b.collidepoint(pygame.mouse.get_pos()) and not button_var["playing"]:
-        return button(screen, button_var["coords"], button_var["name"], button_var["size"], IMAGE_HOVER_COLOR)
+        return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], IMAGE_HOVER_COLOR)
     elif not b.collidepoint(pygame.mouse.get_pos()) and not button_var["playing"]:
-        return button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
+        return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
     else:
         return b
 
@@ -124,7 +119,7 @@ def menu(buttons):
         sounds[b["name"]] = create_sound(b["url"])
 
     for b in buttons:
-        buttons_states[b["name"]] = button(screen, b["coords"], b["name"], b["size"], b["color"])
+        buttons_states[b["name"]] = text_button(screen, b["coords"], b["name"], b["size"], b["color"])
 
     while True:
         for event in pygame.event.get():

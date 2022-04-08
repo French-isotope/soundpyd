@@ -19,7 +19,7 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/MSE.mp3",
-        "sound": pygame.mixer.Sound("C:/test_yt_dl/MSE.mp3")
+#        "sound": pygame.mixer.Sound("C:/test_yt_dl/MSE.mp3")
     },
     {
         "name": "war",
@@ -28,7 +28,7 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/FSW.mp3",
-        "sound": pygame.mixer.Sound("C:/test_yt_dl/FSW.mp3")
+#        "sound": pygame.mixer.Sound("C:/test_yt_dl/FSW.mp3")
     },
     {
         "name": "cavern",
@@ -37,7 +37,7 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/SC.mp3",
-        "sound": pygame.mixer.Sound("C:/test_yt_dl/SC.mp3")
+#        "sound": pygame.mixer.Sound("C:/test_yt_dl/SC.mp3")
     },
     {
         "name": "house_with_fire",
@@ -46,7 +46,7 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/house_with_fire.mp3",
-        "sound": pygame.mixer.Sound("C:/test_yt_dl/house_with_fire.mp3")
+#        "sound": pygame.mixer.Sound("C:/test_yt_dl/house_with_fire.mp3")
     },
     {
         "name": "joy_festival",
@@ -55,9 +55,13 @@ buttons = [
         "size": 20,
         "playing": False,
         "url": f"{BASE_URL}/joy_festival.mp3",
-        "sound": pygame.mixer.Sound("C:/test_yt_dl/joy_festival.mp3")
+#        "sound": pygame.mixer.Sound("C:/test_yt_dl/joy_festival.mp3")
     },
 ]
+
+
+def create_sound(url):
+    return pygame.mixer.Sound(f"{url}")
 
 
 def toggle_sound(is_playing, soundname, sound, fade_time=4000):
@@ -114,9 +118,12 @@ def menu(buttons):
     """ This is the menu that waits you to click the buttons to start playing sounds"""
 
     buttons_states = dict()
+    sounds = dict()
 
     for b in buttons:
-        print(b)
+        sounds[b["name"]] = create_sound(b["url"])
+
+    for b in buttons:
         buttons_states[b["name"]] = button(screen, b["coords"], b["name"], b["size"], b["color"])
 
     while True:
@@ -124,7 +131,7 @@ def menu(buttons):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for b in buttons:
-                    buttons_states[b["name"]] = action_on_click(buttons_states[b["name"]], b, b["sound"], 4000)
+                    buttons_states[b["name"]] = action_on_click(buttons_states[b["name"]], b, sounds[b["name"]], 4000)
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:

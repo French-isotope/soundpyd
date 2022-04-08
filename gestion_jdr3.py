@@ -8,7 +8,7 @@ IMAGE_NORMAL_COLOR = 'white on dodgerblue1'
 IMAGE_HOVER_COLOR = 'white on lightskyblue'
 IMAGE_DOWN_COLOR = 'white on aquamarine1'
 
-BASE_URL = "C:/projects/soundpyd/test_yt_dl"
+BASE_URL = "C:/projects/soundpyd"
 
 
 buttons = [
@@ -18,7 +18,7 @@ buttons = [
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
         "playing": False,
-        "url": f"{BASE_URL}/MSE.mp3",
+        "url": f"{BASE_URL}/test_yt_dl/MSE.mp3",
     },
     {
         "name": "war",
@@ -26,7 +26,7 @@ buttons = [
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
         "playing": False,
-        "url": f"{BASE_URL}/FSW.mp3",
+        "url": f"{BASE_URL}/test_yt_dl/FSW.mp3",
     },
     {
         "name": "cavern",
@@ -34,7 +34,7 @@ buttons = [
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
         "playing": False,
-        "url": f"{BASE_URL}/SC.mp3",
+        "url": f"{BASE_URL}/test_yt_dl/SC.mp3",
     },
     {
         "name": "house_with_fire",
@@ -42,7 +42,7 @@ buttons = [
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
         "playing": False,
-        "url": f"{BASE_URL}/house_with_fire.mp3",
+        "url": f"{BASE_URL}/test_yt_dl/house_with_fire.mp3",
     },
     {
         "name": "joy_festival",
@@ -50,7 +50,7 @@ buttons = [
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
         "playing": False,
-        "url": f"{BASE_URL}/joy_festival.mp3",
+        "url": f"{BASE_URL}/test_yt_dl/joy_festival.mp3",
     },
 ]
 
@@ -81,8 +81,27 @@ def text_button(screen, position, text, size, colors="white on blue"):
     pygame.draw.line(screen, (50, 50, 50), (x, y + h), (x + w, y + h), 5)
     pygame.draw.line(screen, (50, 50, 50), (x + w, y + h), [x + w, y], 5)
     pygame.draw.rect(screen, bg, (x, y, w, h))
-    print(screen.blit(text_render, (x, y)))
+#    print(screen.blit(text_render, (x, y)))
     return screen.blit(text_render, (x, y))
+
+
+def button(x, y, w, h, ic, ac, img, imgon, action=None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+
+    rect = pygame.Rect(x, y, w, h)
+    on_button = rect.collidepoint(mouse)
+    if on_button:
+        pygame.draw.rect(screen, ac, rect)
+        screen.blit(imgon, imgon.get_rect(center = rect.center))
+    else:
+        pygame.draw.rect(screen, ic, rect)
+        screen.blit(img, img.get_rect(center = rect.center))
+
+    if on_button:
+        if click[0] == 1 and action!= None:
+            if action == "continue":
+                print("cool !")
 
 
 def action_on_click(b, var_button, sound, fade_time):
@@ -134,6 +153,15 @@ def menu(buttons):
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
+
+        image = pygame.image.load(f'{BASE_URL}/img/caravan.jfif').convert_alpha()
+        image_on = pygame.image.load(f'{BASE_URL}/img/carpenter2.PNG').convert_alpha()
+
+        background = pygame.Surface((50, 50))
+        screen.blit(background, [0, 0])
+        button(0, 0, 500, 500, pygame.Color(255, 0, 0, 255) , pygame.Color(255, 0, 0, 255) , image, image_on, "continue")
+        pygame.display.update()
+
 
         pygame.display.update()
 

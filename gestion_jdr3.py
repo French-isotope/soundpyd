@@ -154,12 +154,12 @@ def menu(buttons):
             elif event.type == pygame.QUIT:
                 pygame.quit()
 
-        image = pygame.image.load(f'{BASE_URL}/img/caravan.jfif').convert_alpha()
-        image_on = pygame.image.load(f'{BASE_URL}/img/carpenter2.PNG').convert_alpha()
+        image = pygame.image.load(f'{BASE_URL}/img_resized/angry_crowd_rs.png').convert_alpha()
+        image_on = pygame.image.load(f'{BASE_URL}/img_resized/swamps_rs.png').convert_alpha()
 
         background = pygame.Surface((50, 50))
         screen.blit(background, [0, 0])
-        button(0, 0, 500, 500, pygame.Color(255, 0, 0, 255) , pygame.Color(255, 0, 0, 255) , image, image_on, "continue")
+        button(0, 0, 100, 80, pygame.Color(255, 0, 0, 255) , pygame.Color(255, 0, 0, 255) , image, image_on, "continue")
         pygame.display.update()
 
 

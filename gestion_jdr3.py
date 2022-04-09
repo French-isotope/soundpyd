@@ -24,7 +24,6 @@ buttons = [
         "coords": (400, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
-        "playing": False,
         "url": f"{BASE_URL}/test_yt_dl/MSE.mp3",
     },
     {
@@ -32,7 +31,6 @@ buttons = [
         "coords": (300, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
-        "playing": False,
         "url": f"{BASE_URL}/test_yt_dl/FSW.mp3",
     },
     {
@@ -40,7 +38,6 @@ buttons = [
         "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
-        "playing": False,
         "url": f"{BASE_URL}/test_yt_dl/SC.mp3",
     },
     {
@@ -48,7 +45,6 @@ buttons = [
         "coords": (000, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
-        "playing": False,
         "url": f"{BASE_URL}/test_yt_dl/house_with_fire.mp3",
     },
     {
@@ -56,7 +52,6 @@ buttons = [
         "coords": (400, 0),
         "color": IMAGE_NORMAL_COLOR,
         "size": 20,
-        "playing": False,
         "url": f"{BASE_URL}/test_yt_dl/joy_festival.mp3",
     },
 ]
@@ -66,15 +61,17 @@ def create_sound(url):
     return pygame.mixer.Sound(f"{url}")
 
 
-def toggle_sound(is_playing, soundname, sound, fade_time=4000):
-    if is_playing:
+def toggle_sound(b, is_playing, soundname, sound, fade_time=4000):
+    if b.collidepoint(pygame.mouse.get_pos()) and is_playing:
         pygame.mixer.Sound.fadeout(sound, fade_time)
         print(f"Stop sound : {soundname}")
         return False
-    else:
-        print(f"Let's go sound : {soundname}")
+    elif b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
+        print(f"Play sound : {soundname}")
         pygame.mixer.Sound.play(sound, fade_ms=fade_time)
         return True
+    else:
+        return is_playing
 
 
 def text_button(screen, position, text, size, colors="white on blue"):
@@ -92,25 +89,24 @@ def text_button(screen, position, text, size, colors="white on blue"):
     return screen.blit(text_render, (x, y))
 
 
-def action_on_click(b, button_var, sound, fade_time):
+def action_on_click(b, button_var, is_playing):
     if b.collidepoint(pygame.mouse.get_pos()):
-        button_var["playing"] = toggle_sound(button_var["playing"], button_var["name"], sound, fade_time)
-        return change_color_down(button_var)
+        return change_color_down(button_var, is_playing)
     else:
         return b
 
 
-def change_color_down(button_var):
-    if button_var["playing"]:
+def change_color_down(button_var, is_playing):
+    if is_playing:
         return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], IMAGE_DOWN_COLOR)
     else:
         return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
 
 
-def change_color_over(b, button_var):
-    if b.collidepoint(pygame.mouse.get_pos()) and not button_var["playing"]:
+def change_color_over(b, button_var, is_playing):
+    if b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
         return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], IMAGE_HOVER_COLOR)
-    elif not b.collidepoint(pygame.mouse.get_pos()) and not button_var["playing"]:
+    elif not b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
         return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
     else:
         return b
@@ -130,21 +126,23 @@ def menu(buttons):
     is_playing = dict()
 
     for b in buttons:
-        sounds[b["name"]] = create_sound(b["url"])
+        is_playing[b["name"]] = False
 
-    for b in buttons:
         buttons_states[b["name"]] = text_button(screen, b["coords"], b["name"], b["size"], b["color"])
+        sounds[b["name"]] = create_sound(b["url"])
+        print(is_playing[b["name"]])
 
     while True:
         for event in pygame.event.get():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for b in buttons:
-                    buttons_states[b["name"]] = action_on_click(buttons_states[b["name"]], b, sounds[b["name"]], 4000)
+                    buttons_states[b["name"]] = action_on_click(buttons_states[b["name"]], b, is_playing[b["name"]])
+                    is_playing[b["name"]] = toggle_sound(buttons_states[b["name"]], is_playing[b["name"]], b["name"], sounds[b["name"]], 4000)
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:
-                    buttons_states[b["name"]] = change_color_over(buttons_states[b["name"]], b)
+                    buttons_states[b["name"]] = change_color_over(buttons_states[b["name"]], b, is_playing[b["name"]])
 
             elif event.type == pygame.QUIT:
                 pygame.quit()

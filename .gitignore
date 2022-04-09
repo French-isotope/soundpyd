@@ -1,5 +1,10 @@
 # Gitignore for SoundPyd
 
+# exclude rules
+
 .idea/
 sounds/**
 venv/
+
+# exception to the rule
+!sounds/.gitkeep 

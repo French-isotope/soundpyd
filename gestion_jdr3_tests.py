@@ -102,9 +102,9 @@ def toggle_sound(is_playing, soundname, sound, fade_time=4000):
         return is_playing
 
 
-def button(coords, size, ic, ac, img, is_playing, index, put_index=False):
+def button_old(coords, size, ic, ac, img, is_playing, index, put_index=False):
     mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
+#    click = pygame.mouse.get_pressed()
 
     rect = pygame.Rect(coords, size)
 
@@ -112,6 +112,11 @@ def button(coords, size, ic, ac, img, is_playing, index, put_index=False):
     if on_button:
         pygame.draw.rect(screen, ac, rect)
 #        screen.blit(imgon, imgon.get_rect(center = rect.center))
+#        if click[0] == 1:
+#            return not is_playing
+#        else:
+#            return is_playing
+
     else:
         pygame.draw.rect(screen, ic, rect)
         screen.blit(img, img.get_rect(center=rect.center))
@@ -120,10 +125,13 @@ def button(coords, size, ic, ac, img, is_playing, index, put_index=False):
             text = font.render(index, True, pygame.Color(0, 255, 0, 255))
             text_rect = text.get_rect(center=rect.center)
             screen.blit(text, text_rect)
+#        return is_playing
 
-    if on_button:
-        if click[0] == 1:
-            return not is_playing
+
+def button2(coords, size, ic, img):
+    rect = pygame.Rect(coords, size)
+    pygame.draw.rect(screen, ic, rect)
+    return screen.blit(img, img.get_rect(center=rect.center))
 
 
 
@@ -146,12 +154,13 @@ def image_will_be_out_of_screen(pos_x, width, border, screen_width):
     return (pos_x + width + border) > screen_width
 
 
-def menu(buttons):
+def menu(buttons_wanted):
     """ This is the menu that waits you to click the buttons to start playing sounds"""
 
     is_playing = dict()
     sounds = dict()
     images = dict()
+    buttons = dict()
 
     x_index = 0
     y_index = 0
@@ -159,7 +168,7 @@ def menu(buttons):
     pos_y = BORDER
     pos_x = BORDER
 
-    for index, b in enumerate(buttons):
+    for index, b in enumerate(buttons_wanted):
         b_name = b["name"]
         is_playing[b_name] = False
         sounds[b_name] = init_sound(b["url"])
@@ -185,19 +194,19 @@ def menu(buttons):
             if y_index > 0:
                 pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
-        button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, images[b_name], False, str(index))
+        buttons[b_name] = button2((pos_x, pos_y), REQUIRED_SIZE, SOUND_OFF, images[b_name])
+#        button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, images[b_name], False, str(index))
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
-                for index, b in enumerate(buttons):
-                    image = images[b["name"]]
-                    sound = sounds[b["name"]]
-
-                    is_playing[b["name"]] = button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, image,
-                                                   is_playing[b["name"]], str(index))
-                    if is_playing:
-                        toggle_sound(is_playing[b["name"]], b["name"], sound, fade_time=4000)
+                for index, b in enumerate(buttons_wanted):
+                    b_name = b["name"]
+                    sound = sounds[b_name]
+                    button = buttons[b_name]
+                    if button.collidepoint(pygame.mouse.get_pos()):
+                        is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound)
+                    print(is_playing)
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:

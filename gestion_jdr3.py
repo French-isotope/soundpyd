@@ -53,7 +53,7 @@ buttons = [
         "name": "joy_festival",
         "coords": (400, 0),
         "color": IMAGE_NORMAL_COLOR,
-        "size": 50,
+        "size": TYPO_SIZE,
         "url": f"{BASE_URL}/test_yt_dl/joy_festival.mp3",
     },
 ]

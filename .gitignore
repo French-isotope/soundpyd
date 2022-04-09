@@ -7,4 +7,4 @@ sounds/**
 venv/
 
 # exception to the rule
-!sounds
+!sounds/.gitkeep 

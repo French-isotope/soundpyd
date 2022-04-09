@@ -1,4 +1,5 @@
 # Gitignore for SoundPyd
 
+.idea/
 sounds/**
 venv/

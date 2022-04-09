@@ -6,7 +6,7 @@ IMAGE_HOVER_COLOR = 'white on lightskyblue'
 IMAGE_DOWN_COLOR = 'white on aquamarine1'
 
 # Screen dimensions
-SCREEN_HEIGHT = 800
+SCREEN_HEIGHT = 820
 SCREEN_WIDTH = 600
 
 TYPO_DEFAULT_SIZE = 20
@@ -47,6 +47,70 @@ the_buttons = [
     },
     {
         "name": "house_fire4",
+        "coords": (200, 300),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "cavern1",
+        "coords": (35, 75),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/SC.mp3",
+        "img": f"{IMG_DIR}/cavern_rs.png",
+    },
+    {
+        "name": "house_fire1",
+        "coords": (200, 300),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire21",
+        "coords": (200, 300),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire41",
+        "coords": (200, 300),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "cavern2",
+        "coords": (35, 75),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/SC.mp3",
+        "img": f"{IMG_DIR}/cavern_rs.png",
+    },
+    {
+        "name": "house_fire2",
+        "coords": (200, 300),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire22",
+        "coords": (200, 300),
+        "color": IMAGE_NORMAL_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire42",
         "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
@@ -100,12 +164,18 @@ SOUND_ON = pygame.Color(0, 255, 0, 255)
 SOUND_OFF = pygame.Color(255, 0, 0, 255)
 REQUIRED_WIDTH = 105
 REQUIRED_HEIGHT = 85
+BORDER = 5
+
 
 REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
 
 
-def first_image_on_axe(index):
+def first_image_on_x(index):
     return index == 0
+
+
+def image_will_be_out_of_screen(pos_x, width, border, screen_width):
+    return (pos_x + width + border) > screen_width
 
 
 def menu(buttons):
@@ -114,16 +184,36 @@ def menu(buttons):
     sounds = dict()
     is_playing = dict()
 
-    for index, b in enumerate(buttons):
+    x_index = 0
+    y_index = 0
+
+    pos_y = BORDER
+    pos_x = BORDER
+
+    for b in buttons:
         b_name = b["name"]
         is_playing[b_name] = False
         sounds[b_name] = create_sound(b["url"])
         image = pygame.image.load(f'{b["img"]}').convert_alpha()
-        if first_image_on_axe(index):
-            pos_x = 10 + ( index * REQUIRED_WIDTH )
+
+        if first_image_on_x(x_index):
+            pos_x = BORDER
+            x_index += 1
+
+        elif not first_image_on_x(x_index) and image_will_be_out_of_screen(pos_x, REQUIRED_WIDTH, BORDER, SCREEN_WIDTH):
+            pos_x = BORDER
+            x_index = 0
+            y_index += 1
+
         else:
-            pos_x = 10 + (index * REQUIRED_WIDTH) + ( 10 * index )
-        pos_y = 10
+            pos_x = BORDER + (x_index * REQUIRED_WIDTH) + (x_index * BORDER)
+            x_index += 1
+
+        if y_index > 0:
+            pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
+
+
+
 
         button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, image, "continue")
 

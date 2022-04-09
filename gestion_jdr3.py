@@ -1,61 +1,15 @@
 import pygame
-
-# Default button images/pygame.Surfaces.
-IMAGE_NORMAL_COLOR = 'white on dodgerblue1'
-IMAGE_HOVER_COLOR = 'white on lightskyblue'
-IMAGE_DOWN_COLOR = 'white on aquamarine1'
+from buttons import *
 
 # Screen dimensions
 SCREEN_HEIGHT = 800
 SCREEN_WIDTH = 600
 
-TYPO_DEFAULT_SIZE = 20
-
-BASE_URL = "C:/projects/soundpyd"
-SOUNDS_DIR = f"{BASE_URL}/sounds"
-
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_HEIGHT, SCREEN_WIDTH))
 pygame.display.set_caption("Soundpyd")
 
-buttons = [
-    {
-        "name": "growl",
-        "coords": (400, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/MSE.mp3",
-    },
-    {
-        "name": "war",
-        "coords": (300, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/FSW.mp3",
-    },
-    {
-        "name": "cavern",
-        "coords": (200, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/SC.mp3",
-    },
-    {
-        "name": "house_with_fire",
-        "coords": (000, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
-    },
-    {
-        "name": "joy_festival",
-        "coords": (400, 0),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/joy_festival.mp3",
-    },
-]
-
+the_buttons = buttons_needed
 
 def create_sound(url):
     return pygame.mixer.Sound(f"{url}")
@@ -154,4 +108,4 @@ def menu(buttons):
 
 
 if __name__ == "__main__":
-    menu(buttons)
+    menu(the_buttons)

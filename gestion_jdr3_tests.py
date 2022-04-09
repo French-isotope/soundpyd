@@ -6,7 +6,7 @@ IMAGE_HOVER_COLOR = 'white on lightskyblue'
 IMAGE_DOWN_COLOR = 'white on aquamarine1'
 
 # Screen dimensions
-SCREEN_HEIGHT = 820
+SCREEN_HEIGHT = 840
 SCREEN_WIDTH = 600
 
 TYPO_DEFAULT_SIZE = 20
@@ -110,8 +110,8 @@ def button(coords, size, ic, ac, img, index, action=None):
 #        screen.blit(imgon, imgon.get_rect(center = rect.center))
     else:
         pygame.draw.rect(screen, ic, rect)
-        font = pygame.font.Font(None, 20)
-        text = font.render(index, True, pygame.Color(0, 0, 0, 255))
+        font = pygame.font.Font(None, 40)
+        text = font.render(index, True, pygame.Color(0, 255, 0, 255))
         text_rect = text.get_rect(center=rect.center)
         screen.blit(img, img.get_rect(center=rect.center))
         screen.blit(text, text_rect)

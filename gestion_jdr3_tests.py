@@ -98,7 +98,7 @@ def toggle_sound(b, is_playing, soundname, sound, fade_time=4000):
         return is_playing
 
 
-def button(coords, size, ic, ac, img, index, action=None):
+def button(coords, size, ic, ac, img, index, put_index=False, action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
@@ -110,11 +110,12 @@ def button(coords, size, ic, ac, img, index, action=None):
 #        screen.blit(imgon, imgon.get_rect(center = rect.center))
     else:
         pygame.draw.rect(screen, ic, rect)
-        font = pygame.font.Font(None, 40)
-        text = font.render(index, True, pygame.Color(0, 255, 0, 255))
-        text_rect = text.get_rect(center=rect.center)
         screen.blit(img, img.get_rect(center=rect.center))
-        screen.blit(text, text_rect)
+        if put_index:
+            font = pygame.font.Font(None, 40)
+            text = font.render(index, True, pygame.Color(0, 255, 0, 255))
+            text_rect = text.get_rect(center=rect.center)
+            screen.blit(text, text_rect)
 
     if on_button:
         if click[0] == 1 and action!= None:

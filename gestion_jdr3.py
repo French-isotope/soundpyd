@@ -10,6 +10,8 @@ IMAGE_DOWN_COLOR = 'white on aquamarine1'
 SCREEN_HEIGHT = 800
 SCREEN_WIDTH = 600
 
+TYPO_SIZE = 20
+
 BASE_URL = "C:/projects/soundpyd"
 
 
@@ -23,35 +25,35 @@ buttons = [
         "name": "growl",
         "coords": (400, 300),
         "color": IMAGE_NORMAL_COLOR,
-        "size": 20,
+        "size": TYPO_SIZE,
         "url": f"{BASE_URL}/test_yt_dl/MSE.mp3",
     },
     {
         "name": "war",
         "coords": (300, 300),
         "color": IMAGE_NORMAL_COLOR,
-        "size": 20,
+        "size": TYPO_SIZE,
         "url": f"{BASE_URL}/test_yt_dl/FSW.mp3",
     },
     {
         "name": "cavern",
         "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
-        "size": 20,
+        "size": TYPO_SIZE,
         "url": f"{BASE_URL}/test_yt_dl/SC.mp3",
     },
     {
         "name": "house_with_fire",
         "coords": (000, 300),
         "color": IMAGE_NORMAL_COLOR,
-        "size": 20,
+        "size": TYPO_SIZE,
         "url": f"{BASE_URL}/test_yt_dl/house_with_fire.mp3",
     },
     {
         "name": "joy_festival",
         "coords": (400, 0),
         "color": IMAGE_NORMAL_COLOR,
-        "size": 20,
+        "size": 50,
         "url": f"{BASE_URL}/test_yt_dl/joy_festival.mp3",
     },
 ]

@@ -11,7 +11,7 @@ pygame.display.set_caption("Soundpyd")
 
 the_buttons = buttons_needed
 
-def create_sound(url):
+def init_sound(url):
     return pygame.mixer.Sound(f"{url}")
 
 
@@ -83,7 +83,7 @@ def menu(buttons):
         b_name = b["name"]
         is_playing[b_name] = False
         buttons_states[b_name] = text_button(screen, b["coords"], b_name, b["size"], b["color"])
-        sounds[b_name] = create_sound(b["url"])
+        sounds[b_name] = init_sound(b["url"])
         print(is_playing[b_name])
 
     while True:

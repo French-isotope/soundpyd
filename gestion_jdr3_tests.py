@@ -137,8 +137,8 @@ def button2(coords, size, ic, img):
 
 #image_on = pygame.image.load(f'{BASE_URL}/img_resized/swamps_rs.png').convert_alpha()
 
-SOUND_ON = pygame.Color(0, 255, 0, 255)
-SOUND_OFF = pygame.Color(255, 0, 0, 255)
+COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
+COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
 REQUIRED_WIDTH = 105
 REQUIRED_HEIGHT = 85
 BORDER = 5
@@ -194,7 +194,7 @@ def menu(buttons_wanted):
             if y_index > 0:
                 pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
-        buttons[b_name] = button2((pos_x, pos_y), REQUIRED_SIZE, SOUND_OFF, images[b_name])
+        buttons[b_name] = button2((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name])
 #        button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, images[b_name], False, str(index))
 
     while True:
@@ -206,7 +206,10 @@ def menu(buttons_wanted):
                     button = buttons[b_name]
                     if button.collidepoint(pygame.mouse.get_pos()):
                         is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound)
-                    print(is_playing)
+                    if is_playing[b_name]:
+#                        buttons[b_name] = button2((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_ON, images[b_name])
+                        print(buttons)
+
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:

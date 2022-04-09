@@ -149,7 +149,6 @@ def menu(buttons):
             elif event.type == pygame.QUIT:
                 pygame.quit()
 
-
         pygame.display.update()
 
 

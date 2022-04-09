@@ -6,10 +6,17 @@ IMAGE_NORMAL_COLOR = 'white on dodgerblue1'
 IMAGE_HOVER_COLOR = 'white on lightskyblue'
 IMAGE_DOWN_COLOR = 'white on aquamarine1'
 
+# Screen dimensions
+SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 600
+
 BASE_URL = "C:/projects/soundpyd"
 
+
 pygame.init()
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((SCREEN_HEIGHT, SCREEN_WIDTH))
+pygame.display.set_caption("Soundpyd")
+
 
 buttons = [
     {

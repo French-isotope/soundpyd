@@ -19,39 +19,11 @@ pygame.display.set_caption("Soundpyd")
 
 buttons = [
     {
-        "name": "growl",
-        "coords": (400, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{BASE_URL}/test_yt_dl/MSE.mp3",
-    },
-    {
-        "name": "war",
-        "coords": (300, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{BASE_URL}/test_yt_dl/FSW.mp3",
-    },
-    {
         "name": "cavern",
         "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{BASE_URL}/test_yt_dl/SC.mp3",
-    },
-    {
-        "name": "house_with_fire",
-        "coords": (000, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{BASE_URL}/test_yt_dl/house_with_fire.mp3",
-    },
-    {
-        "name": "joy_festival",
-        "coords": (400, 0),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{BASE_URL}/test_yt_dl/joy_festival.mp3",
     },
 ]
 
@@ -110,11 +82,6 @@ def change_color_over(b, button_var, is_playing):
     else:
         return b
 
-
-def image_button(x, y, image):
-    rect = image.get_rect()
-    #    pos = (x, y)
-    screen.blit(image, rect.x, rect.y)
 
 
 def menu(buttons):

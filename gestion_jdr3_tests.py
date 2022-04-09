@@ -23,7 +23,7 @@ buttons = [
         "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{BASE_URL}/test_yt_dl/SC.mp3",
+        "url": f"{BASE_URL}/sounds/SC.mp3",
     },
 ]
 

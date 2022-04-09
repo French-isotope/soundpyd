@@ -72,7 +72,7 @@ the_buttons = [
     },
     {
         "name": "house_fire41",
-        "coords": (200, 300),
+        "coords": (10, 700),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
@@ -98,20 +98,23 @@ def toggle_sound(b, is_playing, soundname, sound, fade_time=4000):
         return is_playing
 
 
-#def button(x, y, w, h, peri_off, peri_on):
-
-def button(coords, size, ic, ac, img, action=None):
+def button(coords, size, ic, ac, img, index, action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
     rect = pygame.Rect(coords, size)
+
     on_button = rect.collidepoint(mouse)
     if on_button:
         pygame.draw.rect(screen, ac, rect)
 #        screen.blit(imgon, imgon.get_rect(center = rect.center))
     else:
         pygame.draw.rect(screen, ic, rect)
-        screen.blit(img, img.get_rect(center = rect.center))
+        font = pygame.font.Font(None, 20)
+        text = font.render(index, True, pygame.Color(0, 0, 0, 255))
+        text_rect = text.get_rect(center=rect.center)
+        screen.blit(img, img.get_rect(center=rect.center))
+        screen.blit(text, text_rect)
 
     if on_button:
         if click[0] == 1 and action!= None:
@@ -151,7 +154,7 @@ def menu(buttons):
     pos_y = BORDER
     pos_x = BORDER
 
-    for b in buttons:
+    for index, b in enumerate(buttons):
         b_name = b["name"]
         is_playing[b_name] = False
         sounds[b_name] = create_sound(b["url"])
@@ -178,8 +181,7 @@ def menu(buttons):
                 pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
 
-
-        button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, image, "continue")
+        button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, image, str(index),"continue")
 
     while True:
         for event in pygame.event.get():

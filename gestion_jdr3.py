@@ -1,6 +1,5 @@
 import pygame
 
-
 # Default button images/pygame.Surfaces.
 IMAGE_NORMAL_COLOR = 'white on dodgerblue1'
 IMAGE_HOVER_COLOR = 'white on lightskyblue'
@@ -14,11 +13,9 @@ TYPO_DEFAULT_SIZE = 20
 
 BASE_URL = "C:/projects/soundpyd"
 
-
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_HEIGHT, SCREEN_WIDTH))
 pygame.display.set_caption("Soundpyd")
-
 
 buttons = [
     {
@@ -87,7 +84,7 @@ def text_button(screen, position, text, size, colors="white on blue"):
     pygame.draw.line(screen, (50, 50, 50), (x, y + h), (x + w, y + h), 5)
     pygame.draw.line(screen, (50, 50, 50), (x + w, y + h), [x + w, y], 5)
     pygame.draw.rect(screen, bg, (x, y, w, h))
-#    print(screen.blit(text_render, (x, y)))
+    #    print(screen.blit(text_render, (x, y)))
     return screen.blit(text_render, (x, y))
 
 
@@ -116,7 +113,7 @@ def change_color_over(b, button_var, is_playing):
 
 def image_button(x, y, image):
     rect = image.get_rect()
-#    pos = (x, y)
+    #    pos = (x, y)
     screen.blit(image, rect.x, rect.y)
 
 
@@ -140,9 +137,9 @@ def menu(buttons):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for b in buttons:
                     b_name = b["name"]
-                    is_playing[b_name] = toggle_sound(buttons_states[b_name], is_playing[b_name], b_name,
-                                                         sounds[b_name], 4000)
-                    buttons_states[b_name] = action_on_click(buttons_states[b_name], b, is_playing[b_name])
+                    b_state = buttons_states[b_name]
+                    is_playing[b_name] = toggle_sound(b_state, is_playing[b_name], b_name, sounds[b_name], 4000)
+                    buttons_states[b_name] = action_on_click(b_state, b, is_playing[b_name])
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:
@@ -157,4 +154,3 @@ def menu(buttons):
 
 if __name__ == "__main__":
     menu(buttons)
-

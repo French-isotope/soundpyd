@@ -92,10 +92,10 @@ def text_button(screen, position, text, size, colors="white on blue"):
     return screen.blit(text_render, (x, y))
 
 
-def action_on_click(b, var_button, sound, fade_time):
+def action_on_click(b, button_var, sound, fade_time):
     if b.collidepoint(pygame.mouse.get_pos()):
-        var_button["playing"] = toggle_sound(var_button["playing"], var_button["name"], sound, fade_time)
-        return change_color_down(var_button)
+        button_var["playing"] = toggle_sound(button_var["playing"], button_var["name"], sound, fade_time)
+        return change_color_down(button_var)
     else:
         return b
 
@@ -127,6 +127,7 @@ def menu(buttons):
 
     buttons_states = dict()
     sounds = dict()
+    is_playing = dict()
 
     for b in buttons:
         sounds[b["name"]] = create_sound(b["url"])

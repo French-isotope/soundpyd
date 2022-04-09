@@ -23,7 +23,6 @@ pygame.display.set_caption("Soundpyd")
 the_buttons = [
     {
         "name": "cavern",
-        "coords": (35, 75),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/SC.mp3",
@@ -31,7 +30,6 @@ the_buttons = [
     },
     {
         "name": "house_fire",
-        "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
@@ -39,7 +37,6 @@ the_buttons = [
     },
     {
         "name": "house_fire2",
-        "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
@@ -47,7 +44,6 @@ the_buttons = [
     },
     {
         "name": "house_fire4",
-        "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
@@ -55,7 +51,6 @@ the_buttons = [
     },
     {
         "name": "cavern1",
-        "coords": (35, 75),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/SC.mp3",
@@ -63,7 +58,6 @@ the_buttons = [
     },
     {
         "name": "house_fire1",
-        "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
@@ -71,7 +65,6 @@ the_buttons = [
     },
     {
         "name": "house_fire21",
-        "coords": (200, 300),
         "color": IMAGE_NORMAL_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
@@ -85,39 +78,7 @@ the_buttons = [
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
-    {
-        "name": "cavern2",
-        "coords": (35, 75),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/SC.mp3",
-        "img": f"{IMG_DIR}/cavern_rs.png",
-    },
-    {
-        "name": "house_fire2",
-        "coords": (200, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "house_fire22",
-        "coords": (200, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "house_fire42",
-        "coords": (200, 300),
-        "color": IMAGE_NORMAL_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-]
+ ]
 
 
 def create_sound(url):
@@ -196,22 +157,25 @@ def menu(buttons):
         sounds[b_name] = create_sound(b["url"])
         image = pygame.image.load(f'{b["img"]}').convert_alpha()
 
-        if first_image_on_x(x_index):
-            pos_x = BORDER
-            x_index += 1
-
-        elif not first_image_on_x(x_index) and image_will_be_out_of_screen(pos_x, REQUIRED_WIDTH, BORDER, SCREEN_WIDTH):
-            pos_x = BORDER
-            x_index = 0
-            y_index += 1
+        if "coords" in b:
+            (pos_x, pos_y) = b["coords"]
 
         else:
-            pos_x = BORDER + (x_index * REQUIRED_WIDTH) + (x_index * BORDER)
-            x_index += 1
+            if first_image_on_x(x_index):
+                pos_x = BORDER
+                x_index += 1
 
-        if y_index > 0:
-            pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
+            elif not first_image_on_x(x_index) and image_will_be_out_of_screen(pos_x, REQUIRED_WIDTH, BORDER, SCREEN_WIDTH):
+                pos_x = BORDER
+                x_index = 0
+                y_index += 1
 
+            else:
+                pos_x = BORDER + (x_index * REQUIRED_WIDTH) + (x_index * BORDER)
+                x_index += 1
+
+            if y_index > 0:
+                pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
 
 

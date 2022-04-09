@@ -137,8 +137,10 @@ def menu(buttons):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for b in buttons:
+                    is_playing[b["name"]] = toggle_sound(buttons_states[b["name"]], is_playing[b["name"]], b["name"],
+                                                         sounds[b["name"]], 4000)
                     buttons_states[b["name"]] = action_on_click(buttons_states[b["name"]], b, is_playing[b["name"]])
-                    is_playing[b["name"]] = toggle_sound(buttons_states[b["name"]], is_playing[b["name"]], b["name"], sounds[b["name"]], 4000)
+
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:

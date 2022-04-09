@@ -1,7 +1,5 @@
 import pygame
 
-pygame.init()
-screen = pygame.display.set_mode((800, 600))
 
 # Default button images/pygame.Surfaces.
 IMAGE_NORMAL_COLOR = 'white on dodgerblue1'
@@ -10,6 +8,8 @@ IMAGE_DOWN_COLOR = 'white on aquamarine1'
 
 BASE_URL = "C:/projects/soundpyd"
 
+pygame.init()
+screen = pygame.display.set_mode((800, 600))
 
 buttons = [
     {
@@ -85,25 +85,6 @@ def text_button(screen, position, text, size, colors="white on blue"):
     return screen.blit(text_render, (x, y))
 
 
-def button(x, y, w, h, ic, ac, img, imgon, action=None):
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-
-    rect = pygame.Rect(x, y, w, h)
-    on_button = rect.collidepoint(mouse)
-    if on_button:
-        pygame.draw.rect(screen, ac, rect)
-        screen.blit(imgon, imgon.get_rect(center = rect.center))
-    else:
-        pygame.draw.rect(screen, ic, rect)
-        screen.blit(img, img.get_rect(center = rect.center))
-
-    if on_button:
-        if click[0] == 1 and action!= None:
-            if action == "continue":
-                print("cool !")
-
-
 def action_on_click(b, var_button, sound, fade_time):
     if b.collidepoint(pygame.mouse.get_pos()):
         var_button["playing"] = toggle_sound(var_button["playing"], var_button["name"], sound, fade_time)
@@ -126,6 +107,12 @@ def change_color_over(b, button_var):
         return text_button(screen, button_var["coords"], button_var["name"], button_var["size"], button_var["color"])
     else:
         return b
+
+
+def image_button(x, y, image):
+    rect = image.get_rect()
+#    pos = (x, y)
+    screen.blit(image, rect.x, rect.y)
 
 
 def menu(buttons):
@@ -153,14 +140,6 @@ def menu(buttons):
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
-
-        image = pygame.image.load(f'{BASE_URL}/img_resized/angry_crowd_rs.png').convert_alpha()
-        image_on = pygame.image.load(f'{BASE_URL}/img_resized/swamps_rs.png').convert_alpha()
-
-        background = pygame.Surface((50, 50))
-        screen.blit(background, [0, 0])
-        button(0, 0, 100, 80, pygame.Color(255, 0, 0, 255) , pygame.Color(255, 0, 0, 255) , image, image_on, "continue")
-        pygame.display.update()
 
 
         pygame.display.update()

@@ -1,4 +1,4 @@
 # Gitignore for SoundPyd
 
 sounds/*.mp3
-venv
+venv/*

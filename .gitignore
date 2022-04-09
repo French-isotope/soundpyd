@@ -1,0 +1,4 @@
+# Gitignore for SoundPyd
+
+/test_yt_dl
+/venv

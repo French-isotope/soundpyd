@@ -128,25 +128,26 @@ def menu(buttons):
     is_playing = dict()
 
     for b in buttons:
-        is_playing[b["name"]] = False
-
-        buttons_states[b["name"]] = text_button(screen, b["coords"], b["name"], b["size"], b["color"])
-        sounds[b["name"]] = create_sound(b["url"])
-        print(is_playing[b["name"]])
+        b_name = b["name"]
+        is_playing[b_name] = False
+        buttons_states[b_name] = text_button(screen, b["coords"], b_name, b["size"], b["color"])
+        sounds[b_name] = create_sound(b["url"])
+        print(is_playing[b_name])
 
     while True:
         for event in pygame.event.get():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for b in buttons:
-                    is_playing[b["name"]] = toggle_sound(buttons_states[b["name"]], is_playing[b["name"]], b["name"],
-                                                         sounds[b["name"]], 4000)
-                    buttons_states[b["name"]] = action_on_click(buttons_states[b["name"]], b, is_playing[b["name"]])
-
+                    b_name = b["name"]
+                    is_playing[b_name] = toggle_sound(buttons_states[b_name], is_playing[b_name], b_name,
+                                                         sounds[b_name], 4000)
+                    buttons_states[b_name] = action_on_click(buttons_states[b_name], b, is_playing[b_name])
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:
-                    buttons_states[b["name"]] = change_color_over(buttons_states[b["name"]], b, is_playing[b["name"]])
+                    b_name = b["name"]
+                    buttons_states[b_name] = change_color_over(buttons_states[b_name], b, is_playing[b_name])
 
             elif event.type == pygame.QUIT:
                 pygame.quit()

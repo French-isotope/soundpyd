@@ -1,12 +1,10 @@
 import pygame
 
 # Default button images/pygame.Surfaces.
-IMAGE_NORMAL_COLOR = 'white on dodgerblue1'
-IMAGE_HOVER_COLOR = 'white on lightskyblue'
-IMAGE_DOWN_COLOR = 'white on aquamarine1'
+TEXT_COLOR = 'white'
 
 # Screen dimensions
-SCREEN_HEIGHT = 840
+SCREEN_HEIGHT = 800
 SCREEN_WIDTH = 600
 
 TYPO_DEFAULT_SIZE = 20
@@ -16,6 +14,15 @@ SOUNDS_DIR = f"{BASE_URL}/sounds"
 IMG_DIR = f"{BASE_URL}/img_resized"
 
 
+COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
+COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
+REQUIRED_WIDTH = 105
+REQUIRED_HEIGHT = 85
+BORDER = 5
+
+REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
+
+
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_HEIGHT, SCREEN_WIDTH))
 pygame.display.set_caption("Soundpyd")
@@ -23,49 +30,49 @@ pygame.display.set_caption("Soundpyd")
 the_buttons = [
     {
         "name": "cavern",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/SC.mp3",
         "img": f"{IMG_DIR}/cavern_rs.png",
     },
     {
         "name": "house_fire",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "house_fire2",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "house_fire4",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "cavern1",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/SC.mp3",
         "img": f"{IMG_DIR}/cavern_rs.png",
     },
     {
         "name": "house_fire1",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "house_fire21",
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
@@ -73,7 +80,7 @@ the_buttons = [
     {
         "name": "house_fire41",
         "coords": (10, 700),
-        "color": IMAGE_NORMAL_COLOR,
+        "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
@@ -128,22 +135,18 @@ def button_old(coords, size, ic, ac, img, is_playing, index, put_index=False):
 #        return is_playing
 
 
-def button2(coords, size, ic, img):
+def create_button(coords, size, color, img):
     rect = pygame.Rect(coords, size)
-    pygame.draw.rect(screen, ic, rect)
+    pygame.draw.rect(screen, color, rect)
     return screen.blit(img, img.get_rect(center=rect.center))
 
 
+def update_button(rect, color, img):
+    pygame.draw.rect(screen, color, rect)
+    return screen.blit(img, img.get_rect(center=rect.center))
+
 
 #image_on = pygame.image.load(f'{BASE_URL}/img_resized/swamps_rs.png').convert_alpha()
-
-COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
-COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
-REQUIRED_WIDTH = 105
-REQUIRED_HEIGHT = 85
-BORDER = 5
-
-REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
 
 
 def first_image_on_x(index):
@@ -194,8 +197,7 @@ def menu(buttons_wanted):
             if y_index > 0:
                 pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
-        buttons[b_name] = button2((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name])
-#        button((pos_x, pos_y), REQUIRED_SIZE, SOUND_ON, SOUND_OFF, images[b_name], False, str(index))
+        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name])
 
     while True:
         for event in pygame.event.get():
@@ -207,7 +209,7 @@ def menu(buttons_wanted):
                     if button.collidepoint(pygame.mouse.get_pos()):
                         is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound)
                     if is_playing[b_name]:
-#                        buttons[b_name] = button2((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_ON, images[b_name])
+                        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_ON, images[b_name])
                         print(buttons)
 
 

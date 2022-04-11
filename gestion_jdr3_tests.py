@@ -32,49 +32,49 @@ the_buttons = [
         "name": "cavern",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/SC.mp3",
+        "url": f"{SOUNDS_DIR}/birds.mp3",
         "img": f"{IMG_DIR}/cavern_rs.png",
     },
     {
         "name": "house_fire",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "url": f"{SOUNDS_DIR}/thunder.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "house_fire2",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "url": f"{SOUNDS_DIR}/door_squeak.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "house_fire4",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "url": f"{SOUNDS_DIR}/stream.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "cavern1",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/SC.mp3",
+        "url": f"{SOUNDS_DIR}/door_squeak.mp3",
         "img": f"{IMG_DIR}/cavern_rs.png",
     },
     {
         "name": "house_fire1",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "url": f"{SOUNDS_DIR}/stream.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
         "name": "house_fire21",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "url": f"{SOUNDS_DIR}/birds.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
@@ -82,7 +82,7 @@ the_buttons = [
         "coords": (10, 700),
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/house_with_fire.mp3",
+        "url": f"{SOUNDS_DIR}/birds.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
  ]
@@ -135,16 +135,17 @@ def button_old(coords, size, ic, ac, img, is_playing, index, put_index=False):
 #        return is_playing
 
 
-def create_button(coords, size, color, img):
+def create_button(coords, size, color, img, screen):
     rect = pygame.Rect(coords, size)
     pygame.draw.rect(screen, color, rect)
-    return screen.blit(img, img.get_rect(center=rect.center))
+    screen.blit(img, img.get_rect(center=rect.center))
+    return rect
 
 
-def update_button(rect, color, img):
+def update_button(rect, color, img, screen):
     pygame.draw.rect(screen, color, rect)
-    return screen.blit(img, img.get_rect(center=rect.center))
-
+    screen.blit(img, img.get_rect(center=rect.center))
+    return rect
 
 #image_on = pygame.image.load(f'{BASE_URL}/img_resized/swamps_rs.png').convert_alpha()
 
@@ -197,8 +198,9 @@ def menu(buttons_wanted):
             if y_index > 0:
                 pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
-        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name])
-
+        #init all buttons
+        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen)
+        print(f"the created button {buttons[b_name]}")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -206,12 +208,14 @@ def menu(buttons_wanted):
                     b_name = b["name"]
                     sound = sounds[b_name]
                     button = buttons[b_name]
+
                     if button.collidepoint(pygame.mouse.get_pos()):
                         is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound)
-                    if is_playing[b_name]:
-                        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_ON, images[b_name])
-                        print(buttons)
-
+                        print(is_playing[b_name])
+                        if is_playing[b_name]:
+                            buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
+                        else:
+                            buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons:
@@ -219,10 +223,6 @@ def menu(buttons_wanted):
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
-
-#            background = pygame.Surface((50, 50))
-#            screen.blit(background, [0, 0])
-
 
         pygame.display.update()
 

@@ -34,6 +34,7 @@ the_buttons = [
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/birds.mp3",
         "img": f"{IMG_DIR}/cavern_rs.png",
+        "nb_loop": 20,
     },
     {
         "name": "house_fire",
@@ -41,6 +42,7 @@ the_buttons = [
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/thunder.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
+        "nb_loop": 2,
     },
     {
         "name": "house_fire2",
@@ -96,14 +98,14 @@ def init_image(url):
     return pygame.image.load(f'{url}').convert_alpha()
 
 
-def toggle_sound(is_playing, soundname, sound, fade_time=4000):
+def toggle_sound(is_playing, soundname, sound, fade_time=4000, nb_loop=0):
     if is_playing:
         pygame.mixer.Sound.fadeout(sound, fade_time)
         print(f"Stop sound : {soundname}")
         return False
     elif not is_playing:
         print(f"Play sound : {soundname}")
-        pygame.mixer.Sound.play(sound, fade_ms=fade_time)
+        pygame.mixer.Sound.play(sound, fade_ms=fade_time, loops=nb_loop)
         return True
     else:
         return is_playing
@@ -182,9 +184,14 @@ def menu(buttons_wanted):
                     b_name = b["name"]
                     sound = sounds[b_name]
                     button = buttons[b_name]
+                    if "nb_loop" in b:
+                        print(f'nb_loopppp : {b["nb_loop"]}')
+                        nb_loop = b["nb_loop"]
+                    else:
+                        nb_loop = 0
 
                     if button.collidepoint(pygame.mouse.get_pos()):
-                        is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound)
+                        is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound, nb_loop=nb_loop)
                         print(is_playing[b_name])
                         if is_playing[b_name]:
                             buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)

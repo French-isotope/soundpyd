@@ -176,7 +176,7 @@ def menu(buttons_wanted):
 
         #init all buttons
         buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen)
-        print(f"the created button {buttons[b_name]}")
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -185,14 +185,12 @@ def menu(buttons_wanted):
                     sound = sounds[b_name]
                     button = buttons[b_name]
                     if "nb_loop" in b:
-                        print(f'nb_loopppp : {b["nb_loop"]}')
                         nb_loop = b["nb_loop"]
                     else:
                         nb_loop = 0
 
                     if button.collidepoint(pygame.mouse.get_pos()):
                         is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound, nb_loop=nb_loop)
-                        print(is_playing[b_name])
                         if is_playing[b_name]:
                             buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
                         else:

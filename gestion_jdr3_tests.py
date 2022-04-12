@@ -216,6 +216,13 @@ def menu(buttons_wanted):
             elif event.type == pygame.QUIT:
                 pygame.quit()
 
+        for channel in channels:
+            print(f"channel is busy : {channel}")
+#            if channel.get_busy():
+#                print(f"channel is busy : {channel}")
+ #           else:
+ #               print(f"channel is NOT busy : {channel}")
+
         pygame.display.update()
 
 

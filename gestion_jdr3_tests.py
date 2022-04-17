@@ -18,7 +18,7 @@ COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
 COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
 REQUIRED_WIDTH = 105
 REQUIRED_HEIGHT = 85
-BORDER = 5
+BORDER = 10
 
 REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
 
@@ -183,14 +183,12 @@ def menu(buttons_wanted):
         sounds[b_name] = init_sound(b["url"])
         images[b_name] = init_image(b["img"])
         channels[b_name] = create_sound_channel(index)
-        print(channels[b_name])
 
         if "coords" in b:
             (pos_x, pos_y) = b["coords"]
 
         else:
             if first_image_on_x(x_index):
-                print(b_name)
                 pos_x = BORDER
                 x_index += 1
 

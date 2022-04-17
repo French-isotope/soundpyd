@@ -213,11 +213,13 @@ def menu(buttons_wanted):
                         nb_loop = 0
 
                     if button.collidepoint(pygame.mouse.get_pos()):
-                        is_playing[b_name] = toggle_sound(is_playing[b_name], b_name, sound, channel, nb_loop=nb_loop)
+                        toggle_sound(playing, b_name, sound, channel, nb_loop=nb_loop)
                         if playing:
                             buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
                         else:
                             buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
+                    pygame.display.update()
+
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons_wanted:
@@ -246,6 +248,9 @@ def menu(buttons_wanted):
                 buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
 
             elif channel.get_busy() and not button.collidepoint(pygame.mouse.get_pos()):
+                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
+
+            elif channel.get_busy() and button.collidepoint(pygame.mouse.get_pos()):
                 buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
 
         pygame.display.update()

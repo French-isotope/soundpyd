@@ -5,6 +5,7 @@
 .idea/
 sounds/**
 venv/
+__pycache__/
 
 # exception to the rule
 !sounds/.gitkeep 

@@ -48,7 +48,7 @@ the_buttons = [
         "name": "house_fire2",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/door_squeak.mp3",
+        "url": f"{SOUNDS_DIR}/thunder.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
@@ -165,6 +165,7 @@ def menu(buttons_wanted):
         sounds[b_name] = init_sound(b["url"])
         images[b_name] = init_image(b["img"])
         channels[b_name] = create_sound_channel(index)
+        print(channels[b_name])
 
         if "coords" in b:
             (pos_x, pos_y) = b["coords"]
@@ -197,6 +198,7 @@ def menu(buttons_wanted):
                     sound = sounds[b_name]
                     button = buttons[b_name]
                     channel = channels[b_name]
+
                     if "nb_loop" in b:
                         nb_loop = b["nb_loop"]
                     else:
@@ -216,8 +218,25 @@ def menu(buttons_wanted):
             elif event.type == pygame.QUIT:
                 pygame.quit()
 
-        for channel in channels:
-            print(f"channel is busy : {channel}")
+
+        for index, b in enumerate(buttons_wanted):
+            b_name = b["name"]
+            sound = sounds[b_name]
+            button = buttons[b_name]
+            channel = channels[b_name]
+
+            if channel.get_busy():
+                pass
+#                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
+            else:
+                buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
+
+
+        #        channel = channels[b_name]
+#        if channel.get_busy():
+#            print(f"ouiii {channel}")
+
+        #            print(f"channel is busy : {channel}")
 #            if channel.get_busy():
 #                print(f"channel is busy : {channel}")
  #           else:

@@ -140,6 +140,15 @@ def set_max_channels_number(number):
     pygame.mixer.set_num_channels(number)
 
 
+def change_color_over(b, button_var, is_playing):
+    if b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
+        return True
+    elif not b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
+        return True
+    else:
+        return b
+
+
 def menu(buttons_wanted):
     """ This is the menu that waits you to click the buttons to start playing sounds"""
 
@@ -210,8 +219,18 @@ def menu(buttons_wanted):
                             buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
 
             elif event.type == pygame.MOUSEMOTION:
-                for b in buttons:
-                    pass
+                for b in buttons_wanted:
+                    b_name = b["name"]
+                    button = buttons[b_name]
+                    playing = is_playing[b_name]
+
+                    if button.collidepoint(pygame.mouse.get_pos()) and not playing:
+                        buttons[b_name] = update_button(button, pygame.Color(0, 125, 125, 255), images[b_name], screen)
+                    elif button.collidepoint(pygame.mouse.get_pos()) and playing:
+                        pass
+                    else:
+                        pass
+                pygame.display.update()
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
@@ -221,7 +240,7 @@ def menu(buttons_wanted):
             button = buttons[b_name]
             channel = channels[b_name]
 
-            if not channel.get_busy():
+            if not channel.get_busy() and not button.collidepoint(pygame.mouse.get_pos()):
                 buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
 
         pygame.display.update()

@@ -4,8 +4,8 @@ import pygame
 TEXT_COLOR = 'white'
 
 # Screen dimensions
-SCREEN_HEIGHT = 800
-SCREEN_WIDTH = 600
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 
 TYPO_DEFAULT_SIZE = 20
 
@@ -24,12 +24,12 @@ REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
 
 
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_HEIGHT, SCREEN_WIDTH))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Soundpyd")
 
 the_buttons = [
     {
-        "name": "cavern",
+        "name": "cavern1",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/birds.mp3",
@@ -37,7 +37,7 @@ the_buttons = [
         "nb_loop": 20,
     },
     {
-        "name": "house_fire",
+        "name": "house_fire2",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/thunder.mp3",
@@ -45,7 +45,7 @@ the_buttons = [
         "nb_loop": 2,
     },
     {
-        "name": "house_fire2",
+        "name": "house_fire3",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/thunder.mp3",
@@ -59,24 +59,52 @@ the_buttons = [
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
-        "name": "cavern1",
+        "name": "cavern5",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/door_squeak.mp3",
         "img": f"{IMG_DIR}/cavern_rs.png",
     },
     {
-        "name": "house_fire1",
+        "name": "house_fire6",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/stream.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
-        "name": "house_fire21",
+        "name": "house_fire7",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/birds.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire8",
+        "color": TEXT_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/birds.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire9",
+        "color": TEXT_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/birds.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire10",
+        "color": TEXT_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/birds.mp3",
+        "img": f"{IMG_DIR}/house_fire_rs.png",
+    },
+    {
+        "name": "house_fire11",
+        "color": TEXT_COLOR,
+        "size": TYPO_DEFAULT_SIZE,
+        "url": f"{SOUNDS_DIR}/summer_storm.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
 ]
@@ -120,8 +148,8 @@ def first_image_on_x(index):
     return index == 0
 
 
-def image_will_be_out_of_screen(pos_x, width, border, screen_width):
-    return (pos_x + width + border) > screen_width
+def image_will_be_out_of_screen(width, border, x_index, screen_width):
+    return (border + (x_index * width) + (x_index * border) + width) > screen_width
 
 
 def create_sound_channel(id_channel):
@@ -130,15 +158,6 @@ def create_sound_channel(id_channel):
 
 def set_max_channels_number(number):
     pygame.mixer.set_num_channels(number)
-
-
-def change_color_over(b, button_var, is_playing):
-    if b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
-        return True
-    elif not b.collidepoint(pygame.mouse.get_pos()) and not is_playing:
-        return True
-    else:
-        return b
 
 
 def menu(buttons_wanted):
@@ -153,8 +172,8 @@ def menu(buttons_wanted):
     x_index = 0
     y_index = 0
 
-    pos_y = BORDER
     pos_x = BORDER
+    pos_y = BORDER
 
     set_max_channels_number(len(buttons_wanted))
 
@@ -171,12 +190,13 @@ def menu(buttons_wanted):
 
         else:
             if first_image_on_x(x_index):
+                print(b_name)
                 pos_x = BORDER
                 x_index += 1
 
-            elif not first_image_on_x(x_index) and image_will_be_out_of_screen(pos_x, REQUIRED_WIDTH, BORDER, SCREEN_WIDTH):
+            elif not first_image_on_x(x_index) and image_will_be_out_of_screen(REQUIRED_WIDTH, BORDER, x_index, SCREEN_WIDTH):
                 pos_x = BORDER
-                x_index = 0
+                x_index = 1
                 y_index += 1
 
             else:
@@ -186,8 +206,10 @@ def menu(buttons_wanted):
             if y_index > 0:
                 pos_y = BORDER + (y_index * REQUIRED_HEIGHT) + (y_index * BORDER)
 
+
         #init all buttons
         buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen)
+
 
     while True:
         for event in pygame.event.get():
@@ -211,7 +233,6 @@ def menu(buttons_wanted):
                         else:
                             buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
                     pygame.display.update()
-
 
             elif event.type == pygame.MOUSEMOTION:
                 for b in buttons_wanted:

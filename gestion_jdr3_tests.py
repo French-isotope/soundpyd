@@ -79,14 +79,6 @@ the_buttons = [
         "url": f"{SOUNDS_DIR}/birds.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
-    {
-        "name": "house_fire41",
-        "coords": (10, 700),
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/birds.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
 ]
 
 

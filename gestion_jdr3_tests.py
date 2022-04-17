@@ -243,6 +243,9 @@ def menu(buttons_wanted):
             if not channel.get_busy() and not button.collidepoint(pygame.mouse.get_pos()):
                 buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
 
+            elif channel.get_busy() and not button.collidepoint(pygame.mouse.get_pos()):
+                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
+
         pygame.display.update()
 
 

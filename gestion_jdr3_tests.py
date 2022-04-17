@@ -100,13 +100,11 @@ def init_image(url):
 
 def toggle_sound(is_playing, soundname, sound, channel, fade_time=4000, nb_loop=0):
     if is_playing:
-        # pygame.mixer.Sound.fadeout(sound, fade_time)
         channel.fadeout(fade_time)
         print(f"Stop sound : {soundname}")
         return False
     elif not is_playing:
         print(f"Play sound : {soundname}")
-#        pygame.mixer.Sound.play(sound, fade_ms=fade_time, loops=nb_loop)
         channel.play(sound, fade_ms=fade_time, loops=nb_loop)
         return True
     else:
@@ -218,29 +216,13 @@ def menu(buttons_wanted):
             elif event.type == pygame.QUIT:
                 pygame.quit()
 
-
-        for index, b in enumerate(buttons_wanted):
+        for b in buttons_wanted:
             b_name = b["name"]
-            sound = sounds[b_name]
             button = buttons[b_name]
             channel = channels[b_name]
 
-            if channel.get_busy():
-                pass
-#                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen)
-            else:
+            if not channel.get_busy():
                 buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen)
-
-
-        #        channel = channels[b_name]
-#        if channel.get_busy():
-#            print(f"ouiii {channel}")
-
-        #            print(f"channel is busy : {channel}")
-#            if channel.get_busy():
-#                print(f"channel is busy : {channel}")
- #           else:
- #               print(f"channel is NOT busy : {channel}")
 
         pygame.display.update()
 

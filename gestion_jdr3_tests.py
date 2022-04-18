@@ -66,14 +66,12 @@ the_buttons = [
         "img": f"{IMG_DIR}/cavern_rs.png",
     },
     {
-        "name": "house_fire6",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/stream.mp3",
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
-        "name": "house_fire7",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/birds.mp3",
@@ -94,7 +92,6 @@ the_buttons = [
         "img": f"{IMG_DIR}/house_fire_rs.png",
     },
     {
-        "name": "house_fire10",
         "color": TEXT_COLOR,
         "size": TYPO_DEFAULT_SIZE,
         "url": f"{SOUNDS_DIR}/birds.mp3",
@@ -184,7 +181,11 @@ def menu(buttons_wanted):
     set_max_channels_number(len(buttons_wanted))
 
     for index, b in enumerate(buttons_wanted):
-        b_name = b["name"]
+        b_name = index
+        if "name" in b:
+            button_title = b["name"]
+        else:
+            button_title = ""
         is_playing[b_name] = False
         sounds[b_name] = init_sound(b["url"])
         images[b_name] = init_image(b["img"])
@@ -212,14 +213,18 @@ def menu(buttons_wanted):
 
 
         #init all buttons
-        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen, f"{b_name}")
+        buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
 
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for index, b in enumerate(buttons_wanted):
-                    b_name = b["name"]
+                    b_name = index
+                    if "name" in b:
+                        button_title = b["name"]
+                    else:
+                        button_title = ""
                     sound = sounds[b_name]
                     button = buttons[b_name]
                     channel = channels[b_name]
@@ -231,24 +236,28 @@ def menu(buttons_wanted):
                         nb_loop = 0
 
                     if button.collidepoint(pygame.mouse.get_pos()):
-                        toggle_sound(playing, b_name, sound, channel, nb_loop=nb_loop)
+                        toggle_sound(playing, button_title, sound, channel, nb_loop=nb_loop)
                         if playing:
-                            buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{b_name}")
+                            buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
                         else:
-                            buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen, f"{b_name}")
+                            buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
                     pygame.display.update()
 
             elif event.type == pygame.MOUSEMOTION:
-                for b in buttons_wanted:
-                    b_name = b["name"]
+                for index, b in enumerate(buttons_wanted):
+                    b_name = index
+                    if "name" in b:
+                        button_title = b["name"]
+                    else:
+                        button_title = ""
                     button = buttons[b_name]
                     channel = channels[b_name]
                     playing = channel.get_busy()
 
                     if button.collidepoint(pygame.mouse.get_pos()) and not playing:
-                        buttons[b_name] = update_button(button, pygame.Color(0, 125, 125, 255), images[b_name], screen, f"{b_name}")
+                        buttons[b_name] = update_button(button, pygame.Color(0, 125, 125, 255), images[b_name], screen, f"{button_title}")
                     elif button.collidepoint(pygame.mouse.get_pos()) and playing:
-                        buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{b_name}")
+                        buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
                     else:
                         pass
                 pygame.display.update()
@@ -256,19 +265,23 @@ def menu(buttons_wanted):
             elif event.type == pygame.QUIT:
                 pygame.quit()
 
-        for b in buttons_wanted:
-            b_name = b["name"]
+        for index, b in enumerate(buttons_wanted):
+            b_name = index
+            if "name" in b:
+                button_title = b["name"]
+            else:
+                button_title = ""
             button = buttons[b_name]
             channel = channels[b_name]
 
             if not channel.get_busy() and not button.collidepoint(pygame.mouse.get_pos()):
-                buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen, f"{b_name}")
+                buttons[b_name] = update_button(button, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
 
             elif channel.get_busy() and not button.collidepoint(pygame.mouse.get_pos()):
-                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{b_name}")
+                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
 
             elif channel.get_busy() and button.collidepoint(pygame.mouse.get_pos()):
-                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{b_name}")
+                buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
 
         pygame.display.update()
 

@@ -16,6 +16,8 @@ IMG_DIR = f"{BASE_URL}/img_resized"
 
 COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
 COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
+COLOR_OVER = pygame.Color(0, 125, 125, 255)
+
 REQUIRED_WIDTH = 105
 REQUIRED_HEIGHT = 85
 BORDER = 5
@@ -255,7 +257,7 @@ def menu(buttons_wanted):
                     playing = channel.get_busy()
 
                     if button.collidepoint(pygame.mouse.get_pos()) and not playing:
-                        buttons[b_name] = update_button(button, pygame.Color(0, 125, 125, 255), images[b_name], screen, f"{button_title}")
+                        buttons[b_name] = update_button(button, COLOR_OVER, images[b_name], screen, f"{button_title}")
                     elif button.collidepoint(pygame.mouse.get_pos()) and playing:
                         buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
                     else:

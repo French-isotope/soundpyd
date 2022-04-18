@@ -136,7 +136,7 @@ def create_button(coords, size, color, img, screen, text=""):
     screen.blit(img, img.get_rect(center=rect.center))
     if len(text) > 0:
         font = pygame.font.SysFont('Arial', 20)
-        screen.blit(font.render(f"{text}", True, (255,0,0) ), img.get_rect(center=rect.center))
+        screen.blit(font.render(f"{text}", True, (255, 0, 0)), img.get_rect(center=rect.center))
     return rect
 
 
@@ -260,8 +260,7 @@ def menu(buttons_wanted):
                         buttons[b_name] = update_button(button, COLOR_OVER, images[b_name], screen, f"{button_title}")
                     elif button.collidepoint(pygame.mouse.get_pos()) and playing:
                         buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
-                    else:
-                        pass
+
                 pygame.display.update()
 
             elif event.type == pygame.QUIT:

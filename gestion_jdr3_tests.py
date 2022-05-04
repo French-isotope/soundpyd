@@ -1,7 +1,7 @@
 import pygame
 import pygame_textinput
 import random
-
+import json
 
 # Default button images/pygame.Surfaces.
 TEXT_COLOR = 'white'
@@ -13,8 +13,8 @@ SCREEN_HEIGHT = 600
 TYPO_DEFAULT_SIZE = 20
 
 BASE_URL = "C:/projects/soundpyd"
-SOUNDS_DIR = f"{BASE_URL}/sounds"
-IMG_DIR = f"{BASE_URL}/img_resized"
+SOUNDS_DIR = f"{BASE_URL}/sounds" # C:/projects/soundpyd/sounds/
+IMG_DIR = f"{BASE_URL}/img_resized"# C:/projects/soundpyd/img_resized/
 
 
 COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
@@ -32,84 +32,12 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Soundpyd")
 
-the_buttons = [
-    {
-        "name": "cavern1",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/birds.mp3",
-        "img": f"{IMG_DIR}/cavern_rs.png",
-        "nb_loop": 20,
-    },
-    {
-        "name": "house_fire2",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/thunder.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-        "nb_loop": 2,
-    },
-    {
-        "name": "house_fire3",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/thunder.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "house_fire4",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/stream.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "cavern5",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/door_squeak.mp3",
-        "img": f"{IMG_DIR}/cavern_rs.png",
-    },
-    {
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/stream.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/birds.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "house_fire8",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/birds.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "house_fire9",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/birds.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/birds.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-    {
-        "name": "house_fire11",
-        "color": TEXT_COLOR,
-        "size": TYPO_DEFAULT_SIZE,
-        "url": f"{SOUNDS_DIR}/summer_storm.mp3",
-        "img": f"{IMG_DIR}/house_fire_rs.png",
-    },
-]
+# Opening JSON file
+file = open(f"{BASE_URL}/config.json")
+
+# returns JSON object as
+# a dictionary
+the_buttons = json.load(file)
 
 random_boxes = [{"type":"d3"}, {"type":"d4"}, {"type":"d6"}, {"type":"d8"}, {"type":"d10"}, {"type":"d12"}, {"type":"d14"}, {"type":"d16"}, {"type":"d20"}, {"type":"d24"}, {"type":"d30"}, {"type":"d60"}, {"type":"d100"}]
 

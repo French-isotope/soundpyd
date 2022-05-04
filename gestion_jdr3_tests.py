@@ -1,4 +1,7 @@
 import pygame
+import pygame_textinput
+import random
+
 
 # Default button images/pygame.Surfaces.
 TEXT_COLOR = 'white'
@@ -108,6 +111,7 @@ the_buttons = [
     },
 ]
 
+random_boxes = [{"type":"d3"}, {"type":"d4"}, {"type":"d6"}, {"type":"d8"}, {"type":"d10"}, {"type":"d12"}, {"type":"d14"}, {"type":"d16"}, {"type":"d20"}, {"type":"d24"}, {"type":"d30"}, {"type":"d60"}, {"type":"d100"}]
 
 def init_sound(url):
     return pygame.mixer.Sound(f"{url}")
@@ -141,6 +145,19 @@ def create_button(coords, size, color, img, screen, text=""):
 
 
 def update_button(rect, color, img, screen, text=""):
+    pygame.draw.rect(screen, color, rect)
+    screen.blit(img, img.get_rect(center=rect.center))
+    if len(text) > 0:
+        font = pygame.font.SysFont('Arial', 20)
+        screen.blit(font.render(f"{text}", True, (255,0,0) ), img.get_rect(center=rect.center))
+    return rect
+
+
+def create_rand_textbox():
+    pass
+
+
+def update_rand_textbox(rect, color, img, screen, text=""):
     pygame.draw.rect(screen, color, rect)
     screen.blit(img, img.get_rect(center=rect.center))
     if len(text) > 0:

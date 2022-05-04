@@ -13,8 +13,8 @@ SCREEN_HEIGHT = 600
 TYPO_DEFAULT_SIZE = 20
 
 BASE_URL = "C:/projects/soundpyd"
-SOUNDS_DIR = f"{BASE_URL}/sounds" # C:/projects/soundpyd/sounds/
-IMG_DIR = f"{BASE_URL}/img_resized"# C:/projects/soundpyd/img_resized/
+#SOUNDS_DIR = f"{BASE_URL}/sounds"
+#IMG_DIR = f"{BASE_URL}/img_resized"
 
 
 COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)

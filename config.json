@@ -3,76 +3,76 @@
         "name": "cavern1",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/birds.mp3",
-        "img": "C:/projects/soundpyd/img_resized/cavern_rs.png",
+        "url": "./sounds/birds.mp3",
+        "img": "./img_resized/cavern_rs.png",
         "nb_loop": 20
     },
     {
         "name": "house_fire2",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/thunder.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png",
+        "url": "./sounds/thunder.mp3",
+        "img": "./img_resized/house_fire_rs.png",
         "nb_loop": 2
     },
     {
         "name": "house_fire3",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/thunder.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/thunder.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "name": "house_fire4",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/stream.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/stream.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "name": "cavern5",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/door_squeak.mp3",
-        "img": "C:/projects/soundpyd/img_resized/cavern_rs.png"
+        "url": "./sounds/door_squeak.mp3",
+        "img": "./img_resized/cavern_rs.png"
     },
     {
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/stream.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/stream.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/birds.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/birds.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "name": "house_fire8",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/birds.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/birds.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "name": "house_fire9",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/birds.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/birds.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/birds.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/birds.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     },
     {
         "name": "house_fire11",
         "color": "white",
         "size": 20,
-        "url": "C:/projects/soundpyd/sounds/summer_storm.mp3",
-        "img": "C:/projects/soundpyd/img_resized/house_fire_rs.png"
+        "url": "./sounds/summer_storm.mp3",
+        "img": "./img_resized/house_fire_rs.png"
     }
 ]

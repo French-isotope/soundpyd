@@ -12,10 +12,6 @@ SCREEN_HEIGHT = 600
 
 TYPO_DEFAULT_SIZE = 20
 
-BASE_URL = "C:/projects/soundpyd"
-#SOUNDS_DIR = f"{BASE_URL}/sounds"
-#IMG_DIR = f"{BASE_URL}/img_resized"
-
 
 COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
 COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
@@ -33,10 +29,9 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Soundpyd")
 
 # Opening JSON file
-file = open(f"{BASE_URL}/config.json")
+file = open(f"./config.json")
 
-# returns JSON object as
-# a dictionary
+# returns JSON object as datastructure
 the_buttons = json.load(file)
 
 random_boxes = [{"type":"d3"}, {"type":"d4"}, {"type":"d6"}, {"type":"d8"}, {"type":"d10"}, {"type":"d12"}, {"type":"d14"}, {"type":"d16"}, {"type":"d20"}, {"type":"d24"}, {"type":"d30"}, {"type":"d60"}, {"type":"d100"}]

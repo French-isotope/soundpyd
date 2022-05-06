@@ -2,24 +2,28 @@ import pygame
 import pygame_textinput
 import random
 import json
+from configparser import ConfigParser
+
+
+parser = ConfigParser()
+parser.read('config.ini')
 
 # Default button images/pygame.Surfaces.
 TEXT_COLOR = 'white'
 
 # Screen dimensions
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = int(parser.get('SCREEN', 'WIDTH'))
+SCREEN_HEIGHT = int(parser.get('SCREEN', 'HEIGHT'))
 
-TYPO_DEFAULT_SIZE = 20
-
+TYPO_SIZE = int(parser.get('TEXT', 'SIZE'))
 
 COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
 COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
 COLOR_OVER = pygame.Color(0, 125, 125, 255)
 
-REQUIRED_WIDTH = 105
-REQUIRED_HEIGHT = 85
-BORDER = 5
+REQUIRED_WIDTH = int(parser.get('BUTTONS', 'REQUIRED_WIDTH'))
+REQUIRED_HEIGHT = int(parser.get('BUTTONS', 'REQUIRED_HEIGHT'))
+BORDER = int(parser.get('BUTTONS', 'BORDER'))
 
 REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
 

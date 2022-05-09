@@ -15,6 +15,11 @@ TEXT_COLOR = 'white'
 SCREEN_WIDTH = int(parser.get('SCREEN', 'WIDTH'))
 SCREEN_HEIGHT = int(parser.get('SCREEN', 'HEIGHT'))
 
+if SCREEN_WIDTH < 800 or SCREEN_HEIGHT < 600:
+    print("\nError: Screen is too little, minimum is 800*600\n")
+    exit(1)
+
+
 TYPO_SIZE = int(parser.get('TEXT', 'SIZE'))
 
 COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)

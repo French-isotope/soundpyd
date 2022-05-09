@@ -47,7 +47,9 @@ urls = [        # footsteps in a dungeon
         # Charpentier :
         "https://youtu.be/or7IiL1i5sE",
         # blacksmith
-        "https://youtu.be/lxKVT1r4sgU",
+        "https://youtu.be/lxKVT1r4sgU", ]
+
+urls = [
         # Marketplace
         "https://youtu.be/x2UulCWGess",
         # Damp cavern
@@ -66,11 +68,14 @@ urls = [        # footsteps in a dungeon
         "https://youtu.be/PWJCBbZOTiI",
         # Hell
         "https://youtu.be/JzVIkY5tKcE",
-        # Cultists
+
+        ]
+urls = [ # Cultists
         "https://youtu.be/rrE1EFE5MqI",
         # Birds
-        "https://youtu.be/0NyQTqpsh_8",
-        # Angry crowd
+        "https://youtu.be/0NyQTqpsh_8",]
+
+urls = [  # Angry crowd
         "https://youtu.be/UNibrdgIVSw",
         # Underwater
         "https://youtu.be/aGmMjk6qipk",
@@ -157,12 +162,13 @@ urls = [        # footsteps in a dungeon
         "https://youtu.be/iLCvsoliKlU",
 
         # others
-        "https://www.youtube.com/watch?v=mtmB30Prqvs",
+        "https://www.youtube.com/watch?v=mtmB30Prqvs",]
+
+urls = [ # 💨 Cold_Howling_Snowstorm_Ambience_in_the_Mountains
         "https://youtu.be/4ZowPmPCZ6I",
+        # ❄️SOUNDS_OF_A_BLIZZARD_STORM_
         "https://youtu.be/vplX-qr4AIE",
         "https://youtu.be/uNF2fi1eUXY",
-
-
         ]
 
 

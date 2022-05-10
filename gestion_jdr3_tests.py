@@ -35,7 +35,12 @@ REQUIRED_HEIGHT = int(parser.get('BUTTONS', 'REQUIRED_HEIGHT'))
 BORDER = int(parser.get('BUTTONS', 'BORDER'))
 
 
-DICES = bool(parser.get('BUTTONS', 'DICES'))
+dices_str = parser.get('BUTTONS', 'DICES')
+
+if dices_str == "False" or dices_str == "":
+    DICES = False
+else:
+    DICES = True
 
 if DICES:
     print("Dices are activated")

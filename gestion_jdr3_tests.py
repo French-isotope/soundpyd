@@ -107,6 +107,7 @@ def create_dice(pos_x, pos_y, screen):
     #      A
     #  C
     #      B
+    rect_color = (60, 60, 60)
     rect_w = 80
     rect_h = 100
     x_shift_1 = pos_x + (rect_w / 2) - BORDER*2
@@ -116,11 +117,45 @@ def create_dice(pos_x, pos_y, screen):
     high_y = 80 - BORDER
     low_y = high_y + triangle_h
     middle_y = high_y + triangle_h/2
+    # text setting
 
     rect = pygame.Rect((pos_x, pos_y,), (rect_w, rect_h))
-    pygame.draw.rect(screen, (100, 70, 70), rect)
-    pygame.draw.polygon(surface=screen, color=(150, 150, 0), points=[(x_shift_1, pos_y + high_y), (x_shift_1, pos_y + low_y), (x_shift_1 - triangle_w, pos_y + middle_y)])
-    pygame.draw.polygon(surface=screen, color=(150, 150, 0), points=[(x_shift_2, pos_y + high_y), (x_shift_2, pos_y + low_y), (x_shift_2 + triangle_w, pos_y + middle_y)])
+    pygame.draw.rect(screen, rect_color, rect)
+
+    pos_x_a1 = x_shift_1
+    pos_y_a1 = pos_y + high_y
+    pos_x_b1 = x_shift_1
+    pos_y_b1 = pos_y + low_y
+    pos_x_c1 = x_shift_1 - triangle_w
+    pos_y_c1 = pos_y + middle_y
+    center_x1 = pos_x_c1 + (pos_x_a1 - pos_x_c1) / 2 + 2
+    center_y1 = pos_y_c1 - 2
+    font_obj = pygame.font.Font("C:\Windows\Fonts\impact.ttf", 20)
+
+    less_arrow = pygame.draw.polygon(surface=screen, color=(100, 100, 100), points=[(pos_x_a1, pos_y_a1), (pos_x_b1, pos_y_b1), (pos_x_c1, pos_y_c1)])
+    # draw the text onto the surface
+    text_surface_obj = font_obj.render('-', True, rect_color)
+    text_rect_obj = text_surface_obj.get_rect()
+    text_rect_obj.center = (center_x1, center_y1)
+    screen.blit(text_surface_obj, text_rect_obj)
+
+    pos_x_a2 = x_shift_2
+    pos_y_a2 = pos_y + high_y
+    pos_x_b2 = x_shift_2
+    pos_y_b2 = pos_y + low_y
+    pos_x_c2 = x_shift_2 + triangle_w
+    pos_y_c2 = pos_y + middle_y
+    center_x2 = pos_x_a2 - (pos_x_a2 - pos_x_c2) / 2 - 3
+    center_y2 = pos_y_c2
+    font_obj = pygame.font.Font("C:\Windows\Fonts\impact.ttf", 16)
+
+    more_arrow = pygame.draw.polygon(surface=screen, color=(100, 100, 100), points=[(pos_x_a2, pos_y_a2), (pos_x_b2, pos_y_b2), (pos_x_c2, pos_y_c2)])
+    # draw the text onto the surface
+    text_surface_obj = font_obj.render('+', True, rect_color)
+    text_rect_obj = text_surface_obj.get_rect()
+    text_rect_obj.center = (center_x2, center_y2)
+    screen.blit(text_surface_obj, text_rect_obj)
+
 
 
 def update_rand_textbox(rect, color, img, screen, text=""):
@@ -201,8 +236,12 @@ def menu(buttons_wanted, dices, screen_height):
         #init all buttons
         buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
 
-        create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
-        create_dice(BORDER * 2, screen_height + BORDER, screen)
+        if DICES:
+            shift_dice = 80 + BORDER
+            create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
+            create_dice(BORDER * 2, screen_height + 50, screen)
+            create_dice(BORDER * 2 + shift_dice, screen_height + 50, screen)
+    #        create_dice(BORDER * 2 + shift_dice * 2, screen_height + 50, screen)
 
 
     while True:

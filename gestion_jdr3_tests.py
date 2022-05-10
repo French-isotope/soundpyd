@@ -15,6 +15,8 @@ TEXT_COLOR = 'white'
 SCREEN_WIDTH = int(parser.get('SCREEN', 'WIDTH'))
 SCREEN_HEIGHT = int(parser.get('SCREEN', 'HEIGHT'))
 
+DICE_HEIGHT = 200
+
 if SCREEN_WIDTH < 800 or SCREEN_HEIGHT < 600:
     print("\nError: Screen is too little, minimum is 800*600\n")
     exit(1)
@@ -26,9 +28,18 @@ COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
 COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
 COLOR_OVER = pygame.Color(0, 125, 125, 255)
 
+COLOR_DICE_ZONE = pygame.Color(46, 46, 46, 0)
+
 REQUIRED_WIDTH = int(parser.get('BUTTONS', 'REQUIRED_WIDTH'))
 REQUIRED_HEIGHT = int(parser.get('BUTTONS', 'REQUIRED_HEIGHT'))
 BORDER = int(parser.get('BUTTONS', 'BORDER'))
+
+
+DICES = bool(parser.get('BUTTONS', 'DICES'))
+
+if DICES:
+    print("Dices are activated")
+
 
 REQUIRED_SIZE = (REQUIRED_WIDTH, REQUIRED_HEIGHT)
 
@@ -85,8 +96,31 @@ def update_button(rect, color, img, screen, text=""):
     return rect
 
 
-def create_rand_textbox():
-    pass
+def create_dice_zone(coords, size, color, screen):
+    rect = pygame.Rect(coords, size)
+    pygame.draw.rect(screen, color, rect)
+    return rect
+
+
+def create_dice(pos_x, pos_y, screen):
+    # (A, B, C)
+    #      A
+    #  C
+    #      B
+    rect_w = 80
+    rect_h = 100
+    x_shift_1 = pos_x + (rect_w / 2) - BORDER*2
+    x_shift_2 = pos_x + (rect_w / 2) + BORDER*2
+    triangle_w = 16
+    triangle_h = 16
+    high_y = 80 - BORDER
+    low_y = high_y + triangle_h
+    middle_y = high_y + triangle_h/2
+
+    rect = pygame.Rect((pos_x, pos_y,), (rect_w, rect_h))
+    pygame.draw.rect(screen, (100, 70, 70), rect)
+    pygame.draw.polygon(surface=screen, color=(150, 150, 0), points=[(x_shift_1, pos_y + high_y), (x_shift_1, pos_y + low_y), (x_shift_1 - triangle_w, pos_y + middle_y)])
+    pygame.draw.polygon(surface=screen, color=(150, 150, 0), points=[(x_shift_2, pos_y + high_y), (x_shift_2, pos_y + low_y), (x_shift_2 + triangle_w, pos_y + middle_y)])
 
 
 def update_rand_textbox(rect, color, img, screen, text=""):
@@ -114,7 +148,7 @@ def set_max_channels_number(number):
     pygame.mixer.set_num_channels(number)
 
 
-def menu(buttons_wanted):
+def menu(buttons_wanted, dices, screen_height):
     """ This is the menu that waits you to click the buttons to start playing sounds"""
 
     is_playing = dict()
@@ -129,6 +163,7 @@ def menu(buttons_wanted):
     pos_x = BORDER
     pos_y = BORDER
 
+    # Create one channel for each sound to play
     set_max_channels_number(len(buttons_wanted))
 
     for index, b in enumerate(buttons_wanted):
@@ -165,6 +200,9 @@ def menu(buttons_wanted):
 
         #init all buttons
         buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
+
+        create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
+        create_dice(BORDER * 2, screen_height + BORDER, screen)
 
 
     while True:
@@ -233,8 +271,15 @@ def menu(buttons_wanted):
             elif channel.get_busy() and button.collidepoint(pygame.mouse.get_pos()):
                 buttons[b_name] = update_button(button, COLOR_SOUND_ON, images[b_name], screen, f"{button_title}")
 
+
         pygame.display.update()
 
 
 if __name__ == "__main__":
-    menu(the_buttons)
+
+    if DICES:
+        height_screen = SCREEN_HEIGHT - DICE_HEIGHT
+    else:
+        height_screen = SCREEN_HEIGHT
+
+    menu(the_buttons, DICES, height_screen)

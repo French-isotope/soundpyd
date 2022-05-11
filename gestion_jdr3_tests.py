@@ -28,7 +28,7 @@ COLOR_SOUND_ON = pygame.Color(0, 255, 0, 255)
 COLOR_SOUND_OFF = pygame.Color(255, 0, 0, 255)
 COLOR_OVER = pygame.Color(0, 125, 125, 255)
 
-COLOR_DICE_ZONE = pygame.Color(46, 46, 46, 0)
+COLOR_DICE_ZONE = pygame.Color(146, 146, 146, 0)
 
 REQUIRED_WIDTH = int(parser.get('BUTTONS', 'REQUIRED_WIDTH'))
 REQUIRED_HEIGHT = int(parser.get('BUTTONS', 'REQUIRED_HEIGHT'))
@@ -103,7 +103,7 @@ def update_button(rect, color, img, screen, text=""):
 
 def create_dice_zone(coords, size, color, screen):
     rect = pygame.Rect(coords, size)
-    pygame.draw.rect(screen, color, rect)
+    pygame.draw.rect(screen, color, rect, width=1)
     return rect
 
 
@@ -112,7 +112,8 @@ def create_dice(pos_x, pos_y, screen):
     #      A
     #  C
     #      B
-    rect_color = (60, 60, 60)
+    rect_color = (90, 90, 90)
+    buttons_color = (120, 120, 120)
     rect_w = 80
     rect_h = 100
     x_shift_1 = pos_x + (rect_w / 2) - BORDER*2
@@ -124,7 +125,7 @@ def create_dice(pos_x, pos_y, screen):
     middle_y = high_y + triangle_h/2
     # text setting
 
-    rect = pygame.Rect((pos_x, pos_y,), (rect_w, rect_h))
+    rect = pygame.Rect((pos_x, pos_y), (rect_w, rect_h))
     pygame.draw.rect(screen, rect_color, rect)
 
     pos_x_a1 = x_shift_1
@@ -137,7 +138,7 @@ def create_dice(pos_x, pos_y, screen):
     center_y1 = pos_y_c1 - 2
     font_obj = pygame.font.Font("C:\Windows\Fonts\impact.ttf", 20)
 
-    less_arrow = pygame.draw.polygon(surface=screen, color=(100, 100, 100), points=[(pos_x_a1, pos_y_a1), (pos_x_b1, pos_y_b1), (pos_x_c1, pos_y_c1)])
+    less_arrow = pygame.draw.polygon(screen, buttons_color, points=[(pos_x_a1, pos_y_a1), (pos_x_b1, pos_y_b1), (pos_x_c1, pos_y_c1)])
     # draw the text onto the surface
     text_surface_obj = font_obj.render('-', True, rect_color)
     text_rect_obj = text_surface_obj.get_rect()
@@ -154,7 +155,7 @@ def create_dice(pos_x, pos_y, screen):
     center_y2 = pos_y_c2
     font_obj = pygame.font.Font("C:\Windows\Fonts\impact.ttf", 16)
 
-    more_arrow = pygame.draw.polygon(surface=screen, color=(100, 100, 100), points=[(pos_x_a2, pos_y_a2), (pos_x_b2, pos_y_b2), (pos_x_c2, pos_y_c2)])
+    more_arrow = pygame.draw.polygon(screen, buttons_color, points=[(pos_x_a2, pos_y_a2), (pos_x_b2, pos_y_b2), (pos_x_c2, pos_y_c2)])
     # draw the text onto the surface
     text_surface_obj = font_obj.render('+', True, rect_color)
     text_rect_obj = text_surface_obj.get_rect()
@@ -244,8 +245,8 @@ def menu(buttons_wanted, dices, screen_height):
         if DICES:
             shift_dice = 80 + BORDER
             create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
-            create_dice(BORDER * 2, screen_height + 50, screen)
-            create_dice(BORDER * 2 + shift_dice, screen_height + 50, screen)
+            create_dice(BORDER * 2, screen_height + BORDER, screen)
+            create_dice(BORDER * 2 + shift_dice, screen_height + BORDER, screen)
     #        create_dice(BORDER * 2 + shift_dice * 2, screen_height + 50, screen)
 
 

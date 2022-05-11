@@ -107,7 +107,7 @@ def create_dice_zone(coords, size, color, screen):
     return rect
 
 
-def create_dice(pos_x, pos_y, screen):
+def create_dice(pos_x, pos_y, screen, filename):
     # (A, B, C)
     #      A
     #  C
@@ -124,9 +124,14 @@ def create_dice(pos_x, pos_y, screen):
     low_y = high_y + triangle_h
     middle_y = high_y + triangle_h/2
     # text setting
-
     rect = pygame.Rect((pos_x, pos_y), (rect_w, rect_h))
     pygame.draw.rect(screen, rect_color, rect)
+
+    # Blit image of the dice
+    picture = pygame.image.load(filename)
+    picture = pygame.transform.scale(picture, (rect_w / 1.5, rect_w / 1.5))
+    center_rect = picture.get_rect(center=rect.center)
+    screen.blit(picture, (center_rect.left, center_rect.top - 15))
 
     pos_x_a1 = x_shift_1
     pos_y_a1 = pos_y + high_y
@@ -245,8 +250,15 @@ def menu(buttons_wanted, dices, screen_height):
         if DICES:
             shift_dice = 80 + BORDER
             create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
-            create_dice(BORDER * 2, screen_height + BORDER, screen)
-            create_dice(BORDER * 2 + shift_dice, screen_height + BORDER, screen)
+            create_dice(BORDER * 2, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d2.png")
+            create_dice(BORDER * 2 + shift_dice, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d3.png")
+            create_dice(BORDER * 2 + shift_dice * 2, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d4.png")
+            create_dice(BORDER * 2 + shift_dice * 3, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d6.png")
+            create_dice(BORDER * 2 + shift_dice * 4, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d8.png")
+            create_dice(BORDER * 2 + shift_dice * 5, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d10.png")
+            create_dice(BORDER * 2 + shift_dice * 6, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d12.png")
+            create_dice(BORDER * 2 + shift_dice * 7, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d20.png")
+            create_dice(BORDER * 2 + shift_dice * 8, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d100.png")
     #        create_dice(BORDER * 2 + shift_dice * 2, screen_height + 50, screen)
 
 

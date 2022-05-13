@@ -260,7 +260,7 @@ def menu(buttons_wanted, dices, screen_height):
         if DICES:
             rect_w = 80
             rect_h = 100
-            shift_dice = 80 + BORDER
+            shift_dice = rect_w + BORDER
 
             create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
             for index, dice in enumerate(all_dices):

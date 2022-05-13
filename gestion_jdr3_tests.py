@@ -3,7 +3,7 @@ import pygame_textinput
 import random
 import json
 from configparser import ConfigParser
-
+import math
 
 parser = ConfigParser()
 parser.read('config.ini')
@@ -69,6 +69,8 @@ all_dices = ["C:\projects\soundpyd\dices\d2.png",
          "C:\projects\soundpyd\dices\d10.png",
          "C:\projects\soundpyd\dices\d12.png",
          "C:\projects\soundpyd\dices\d20.png",
+         "C:\projects\soundpyd\dices\d100.png",
+         "C:\projects\soundpyd\dices\d100.png",
          "C:\projects\soundpyd\dices\d100.png"]
 
 
@@ -130,7 +132,7 @@ def create_dice(pos_x, pos_y, screen, rect_w, rect_h, filename):
     x_shift_2 = pos_x + (rect_w / 2) + BORDER*2
     triangle_w = 16
     triangle_h = 16
-    high_y = 80 - BORDER
+    high_y = rect_w - BORDER
     low_y = high_y + triangle_h
     middle_y = high_y + triangle_h/2
     # text setting
@@ -258,11 +260,15 @@ def menu(buttons_wanted, dices, screen_height):
         buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
 
         if DICES:
-            rect_w = 80
-            rect_h = 100
+            rect_w = ((SCREEN_WIDTH - BORDER * ( 4 + len(all_dices) - 1 ) ) / (len(all_dices)))
+#            print(len(all_dices))
+            print(rect_w)
+            rect_h = rect_w * 1.20
+            print(rect_h)
             shift_dice = rect_w + BORDER
 
             create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
+
             for index, dice in enumerate(all_dices):
                 create_dice(BORDER * 2 + shift_dice * index, screen_height + BORDER, screen, rect_w, rect_h, dice)
 

@@ -70,8 +70,7 @@ all_dices = ["C:\projects\soundpyd\dices\d2.png",
          "C:\projects\soundpyd\dices\d12.png",
          "C:\projects\soundpyd\dices\d20.png",
          "C:\projects\soundpyd\dices\d100.png",
-         "C:\projects\soundpyd\dices\d100.png",
-         "C:\projects\soundpyd\dices\d100.png"]
+         "C:\projects\soundpyd\dices\d_perso.png"]
 
 
 
@@ -178,6 +177,13 @@ def create_dice(pos_x, pos_y, screen, rect_w, rect_h, filename):
     text_rect_obj = text_surface_obj.get_rect()
     text_rect_obj.center = (center_x2, center_y2)
     screen.blit(text_surface_obj, text_rect_obj)
+
+    # Square between triangles
+    size_square = pos_x_a2 - pos_x_a1 - 5
+    size_square2 = pos_y_b1 - pos_y_a1
+    print(f"la size {size_square} {size_square2}")
+    rect = pygame.Rect((pos_x_a1 + 3, pos_y_a1 + 1), (size_square, size_square2))
+    pygame.draw.rect(screen, (120, 120, 120), rect)
 
 
 

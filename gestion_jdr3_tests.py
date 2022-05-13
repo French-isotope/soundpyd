@@ -61,6 +61,18 @@ the_buttons = json.load(file)
 
 random_boxes = [{"type":"d3"}, {"type":"d4"}, {"type":"d6"}, {"type":"d8"}, {"type":"d10"}, {"type":"d12"}, {"type":"d14"}, {"type":"d16"}, {"type":"d20"}, {"type":"d24"}, {"type":"d30"}, {"type":"d60"}, {"type":"d100"}]
 
+all_dices = ["C:\projects\soundpyd\dices\d2.png",
+         "C:\projects\soundpyd\dices\d3.png",
+         "C:\projects\soundpyd\dices\d4.png",
+         "C:\projects\soundpyd\dices\d6.png",
+         "C:\projects\soundpyd\dices\d8.png",
+         "C:\projects\soundpyd\dices\d10.png",
+         "C:\projects\soundpyd\dices\d12.png",
+         "C:\projects\soundpyd\dices\d20.png",
+         "C:\projects\soundpyd\dices\d100.png"]
+
+
+
 def init_sound(url):
     return pygame.mixer.Sound(f"{url}")
 
@@ -107,15 +119,13 @@ def create_dice_zone(coords, size, color, screen):
     return rect
 
 
-def create_dice(pos_x, pos_y, screen, filename):
+def create_dice(pos_x, pos_y, screen, rect_w, rect_h, filename):
     # (A, B, C)
     #      A
     #  C
     #      B
     rect_color = (90, 90, 90)
     buttons_color = (120, 120, 120)
-    rect_w = 80
-    rect_h = 100
     x_shift_1 = pos_x + (rect_w / 2) - BORDER*2
     x_shift_2 = pos_x + (rect_w / 2) + BORDER*2
     triangle_w = 16
@@ -248,18 +258,13 @@ def menu(buttons_wanted, dices, screen_height):
         buttons[b_name] = create_button((pos_x, pos_y), REQUIRED_SIZE, COLOR_SOUND_OFF, images[b_name], screen, f"{button_title}")
 
         if DICES:
+            rect_w = 80
+            rect_h = 100
             shift_dice = 80 + BORDER
+
             create_dice_zone((BORDER, SCREEN_HEIGHT - DICE_HEIGHT), (SCREEN_WIDTH - BORDER*2, DICE_HEIGHT - BORDER), COLOR_DICE_ZONE, screen)
-            create_dice(BORDER * 2, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d2.png")
-            create_dice(BORDER * 2 + shift_dice, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d3.png")
-            create_dice(BORDER * 2 + shift_dice * 2, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d4.png")
-            create_dice(BORDER * 2 + shift_dice * 3, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d6.png")
-            create_dice(BORDER * 2 + shift_dice * 4, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d8.png")
-            create_dice(BORDER * 2 + shift_dice * 5, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d10.png")
-            create_dice(BORDER * 2 + shift_dice * 6, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d12.png")
-            create_dice(BORDER * 2 + shift_dice * 7, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d20.png")
-            create_dice(BORDER * 2 + shift_dice * 8, screen_height + BORDER, screen, "C:\projects\soundpyd\dices\d100.png")
-    #        create_dice(BORDER * 2 + shift_dice * 2, screen_height + 50, screen)
+            for index, dice in enumerate(all_dices):
+                create_dice(BORDER * 2 + shift_dice * index, screen_height + BORDER, screen, rect_w, rect_h, dice)
 
 
     while True:

@@ -1,5 +1,5 @@
 let pkgs = import ./nixpkgs.nix {};
-  pythonEnv = pkgs.python3.withPackages(p : [p.numpy p.matplotlib]);
+  pythonEnv = pkgs.python310.withPackages(p : [p.pygame p.configparser]);
 in pkgs.mkShell {
   buildInputs = [ pythonEnv ];
 }

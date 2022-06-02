@@ -1,4 +1,5 @@
-
+#! /usr/bin/env nix-shell
+#! nix-shell default.nix -i python
 
 import pygame
 import pygame_textinput

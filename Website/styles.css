@@ -1,0 +1,170 @@
+@import url(http://weloveiconfonts.com/api/?family=fontelico);
+
+[class*="fontelico-"]:before {
+  font-family: 'fontelico', sans-serif;
+}
+
+.logo.navbar-brand {
+  height: 40px;
+  line-height: 40px;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.flat-window-container {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+
+.flat-window-header {
+  background-color: #323232;
+  font-size: 13px;
+  font-weight: bold;
+  height: 33px;
+  padding: 0 15px;
+  position: relative;
+  border-radius: 15px 15px 0 0;
+}
+
+.flat-window-header > div {
+  height: 100%;
+  vertical-align: middle;
+}
+
+.flat-window-button-group {
+  position: absolute;
+}
+
+.flat-window-button {
+  border-radius: 13px;
+  height: 13px;
+  margin-right: 5px;
+  width: 13px;
+}
+
+.flat-window-button-close {
+  background-color: #f8645f;
+}
+
+.flat-window-button-minimize {
+  background-color: #f8c574;
+}
+
+.flat-window-button-maximize {
+  background-color: #9dcc7d;
+}
+
+.flat-window-title-bar {
+
+}
+
+.flat-window-body {
+  background-color: #363636;
+  padding: 0 15px;
+  border-radius: 0 0 15px 15px;
+}
+
+.flat-window-middle > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.flat-window-middle:before {
+  content: " ";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+pre.source-code {
+  background: none;
+  border: none;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+.flat-browser {
+  color: #363636;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
+}
+
+.flat-browser .flat-window-header {
+  background-color: #e2e2e2;
+  height: 52px;
+  border-radius: 10px 10px 0 0;
+}
+
+.flat-browser .flat-window-body {
+  background-color: #f7f7f7;
+  border-radius: 0 0 10px 10px;
+  padding: 0 0px;
+}
+
+.flat-browser iframe {
+  border: none;
+  overflow: hidden;
+  pointer-events: none;
+  width: 100%;
+}
+
+.viewable {
+  pointer-events: auto !important;
+}
+
+.flat-browser .flat-browser-address-bar {
+  background-color: white;
+  border-radius: 15px;
+  display: inline-block;
+  height: 24px;
+  overflow: hidden;
+  padding: 0 15px;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100% - 99px);
+}
+
+#refresh {
+  background: none;
+  border: none;
+  padding: 0 0 0 5px;
+}
+
+#refresh > span {
+  font-size: 21px;
+  opacity: .5;
+  text-shadow: 0 1px 0 #fff;
+}
+
+#refresh:hover > span, #refresh:focus > span {
+  opacity: .7;
+}
+
+.toggle-active {
+  opacity: .7 !important;
+}
+
+#injected-html:before {
+  content: "HTML source: ";
+}
+
+.you-won {
+  color: #1abc9c;
+  text-align: center;
+}
+
+.tagsinput {
+  height: auto;
+  margin: 0;
+}
+
+.tagsinput .tag {
+  padding: 6px 13px 8px 13px;
+}
+
+.tagsinput .tag.tag-pending-verification {
+  background-color: #d8d8d8 !important;
+}
+
+.tagsinput .tag:hover {
+  padding: 6px 13px 8px 13px;
+}

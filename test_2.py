@@ -5,7 +5,9 @@ from pydub import AudioSegment
 
 # where to save
 DOWNLOAD_PATH = "C:\\test_yt_dl\\Download"
+DOWNLOAD_PATH = "C:\\download_djo"
 SAVE_PATH = "C:\\test_yt_dl"  # to_do
+SAVE_PATH = "C:\\download_djo\\mp3"  # to_do
 
 # link of the video to be downloaded
 url = "https://youtu.be/gcPSA3sUilc"
@@ -171,12 +173,21 @@ urls = [ # 💨 Cold_Howling_Snowstorm_Ambience_in_the_Mountains
         "https://youtu.be/uNF2fi1eUXY",
         ]
 
+urls = ["https://www.youtube.com/watch?v=MhK4cp_ZRAU",
+        "https://youtu.be/DW4WaTmoZ3c"]
+
+urls = ["https://youtu.be/ThlqMityboI", "https://youtu.be/NqIF9i24j4g", "https://youtu.be/BpIf43m2ZQI", "https://youtu.be/w25ad-4Gik8", "https://youtu.be/a2_ss9y-VjE", "https://youtu.be/S2uR94ciCFQ", "https://youtu.be/OwmTWl28R1k", "https://youtu.be/Q6ALZT-A9Yo"]
+urls = ['https://youtu.be/1nvOw1ON-KY']
+
 
 for url in urls:
 
     # Target mp4 from youtube
     youtube = pytube.YouTube(url)
-    print(youtube.streams)
+
+    for stream in youtube.streams:
+        print(stream)
+
     video = youtube.streams.get_by_itag(140)
 
     # get filename and download

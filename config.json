@@ -18,16 +18,16 @@
     },
     {
         "name": "house_fire4",
-        "url": "./sounds/stream.mp3",
+        "url": "./sounds/birds.mp3",
         "img": "./img_resized/house_fire_rs.png"
     },
     {
         "name": "cavern5",
-        "url": "./sounds/door_squeak.mp3",
+        "url": "./sounds/birds.mp3",
         "img": "./img_resized/cavern_rs.png"
     },
     {
-        "url": "./sounds/stream.mp3",
+        "url": "./sounds/birds.mp3",
         "img": "./img_resized/house_fire_rs.png"
     },
     {
@@ -50,7 +50,7 @@
     },
     {
         "name": "house_fire11",
-        "url": "./sounds/summer_storm.mp3",
+        "url": "./sounds/thunder.mp3",
         "img": "./img_resized/house_fire_rs.png"
     }
 ]

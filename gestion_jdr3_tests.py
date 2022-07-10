@@ -1,9 +1,12 @@
+#! /usr/bin/env nix-shell
+#! nix-shell default.nix -i python
+
 import pygame
-import pygame_textinput
-import random
+#import pygame_textinput
+#import random
 import json
 from configparser import ConfigParser
-import math
+#import math
 
 parser = ConfigParser()
 parser.read('config.ini')
@@ -53,6 +56,8 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Soundpyd")
 
+
+
 # Opening JSON file
 file = open(f"./config.json")
 
@@ -61,16 +66,16 @@ the_buttons = json.load(file)
 
 random_boxes = [{"type":"d3"}, {"type":"d4"}, {"type":"d6"}, {"type":"d8"}, {"type":"d10"}, {"type":"d12"}, {"type":"d14"}, {"type":"d16"}, {"type":"d20"}, {"type":"d24"}, {"type":"d30"}, {"type":"d60"}, {"type":"d100"}]
 
-all_dices = ["C:\projects\soundpyd\dices\d2.png",
-         "C:\projects\soundpyd\dices\d3.png",
-         "C:\projects\soundpyd\dices\d4.png",
-         "C:\projects\soundpyd\dices\d6.png",
-         "C:\projects\soundpyd\dices\d8.png",
-         "C:\projects\soundpyd\dices\d10.png",
-         "C:\projects\soundpyd\dices\d12.png",
-         "C:\projects\soundpyd\dices\d20.png",
-         "C:\projects\soundpyd\dices\d100.png",
-         "C:\projects\soundpyd\dices\d_perso.png"]
+all_dices = ["./dices/d2.png",
+         "./dices/d3.png",
+         "./dices/d4.png",
+         "./dices/d6.png",
+         "./dices/d8.png",
+         "./dices/d10.png",
+         "./dices/d12.png",
+         "./dices/d20.png",
+         "./dices/d100.png",
+         "./dices/d_perso.png"]
 
 
 
@@ -152,7 +157,7 @@ def create_dice(pos_x, pos_y, screen, rect_w, rect_h, filename):
     pos_y_c1 = pos_y + middle_y
     center_x1 = pos_x_c1 + (pos_x_a1 - pos_x_c1) / 2 + 2
     center_y1 = pos_y_c1 - 2
-    font_obj = pygame.font.Font("C:\Windows\Fonts\impact.ttf", 20)
+    font_obj = pygame.font.Font("/usr/share/gazebo-11/media/fonts/arial.ttf", 20)
 
     less_arrow = pygame.draw.polygon(screen, buttons_color, points=[(pos_x_a1, pos_y_a1), (pos_x_b1, pos_y_b1), (pos_x_c1, pos_y_c1)])
     # draw the text onto the surface
@@ -169,7 +174,7 @@ def create_dice(pos_x, pos_y, screen, rect_w, rect_h, filename):
     pos_y_c2 = pos_y + middle_y
     center_x2 = pos_x_a2 - (pos_x_a2 - pos_x_c2) / 2 - 3
     center_y2 = pos_y_c2
-    font_obj = pygame.font.Font("C:\Windows\Fonts\impact.ttf", 16)
+    font_obj = pygame.font.Font("/usr/share/gazebo-11/media/fonts/arial.ttf", 16)
 
     more_arrow = pygame.draw.polygon(screen, buttons_color, points=[(pos_x_a2, pos_y_a2), (pos_x_b2, pos_y_b2), (pos_x_c2, pos_y_c2)])
     # draw the text onto the surface
